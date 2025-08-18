@@ -103,8 +103,8 @@ h2{ margin:0 0 12px; font-size: clamp(18px, 2.2vw, 26px); letter-spacing:.3px; }
 
 /* --- Contact Buttons --- */
 .copy, .open {
-  padding: 12px 18px;   /* বড় করা */
-  font-size: 14px;      /* বড় লেখা */
+  padding: 12px 18px;
+  font-size: 14px;
   border-radius: 14px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -138,7 +138,7 @@ h2{ margin:0 0 12px; font-size: clamp(18px, 2.2vw, 26px); letter-spacing:.3px; }
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px; /* pills এর মধ্যে gap বাড়ানো */
+  gap: 12px;
 }
 
 .pill {
@@ -148,7 +148,7 @@ h2{ margin:0 0 12px; font-size: clamp(18px, 2.2vw, 26px); letter-spacing:.3px; }
   border:1px solid #333;
   font-weight:600;
   font-size:13px;
-  white-space: nowrap; /* এক লাইনেই থাকবে, wrap করবে না */
+  white-space: nowrap;
 }
 
 .progress-bar{ width:100%; height:12px; background:#222; border-radius:10px; overflow:hidden; }
@@ -166,7 +166,6 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
 }
 </style>
 
-
 </head>
 <body>
 <div class="plasma"></div>
@@ -183,7 +182,7 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
     </div>
   </div>
   <div class="cta">
-    <a class="btn" href="#contacts"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+    <a class="btn" href="#contacts"><i class="fa fa-phone"></i> Contact</a>
     <button class="btn alt" id="printBtn"><i class="fa-solid fa-print"></i> Print</button>
   </div>
 </header>
@@ -192,18 +191,19 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
   <!-- Identity -->
   <article class="card span-4">
     <div class="glow"></div>
-    <h2>Identity</h2>
+    <h2><i class="fa-solid fa-id-card"></i> Identity</h2>
     <div class="fields">
       <div class="field"><div class="label">Full Name</div><div class="value">Shadman Shakib <span class="badge">Sium</span></div></div>
       <div class="field"><div class="label">Country / District</div><div class="value">Bangladesh • Panchagarh</div></div>
       <div class="field"><div class="label">Religion</div><div class="value">Islam 🌙</div></div>
+      <div class="field"><div class="label">Born</div><div class="value">14th March 20**</div></div>
     </div>
   </article>
 
   <!-- Interests -->
-  <article class="card span-8">
+  <article class="card span-4">
     <div class="glow"></div>
-    <h2>Interests & Passions</h2>
+    <h2><i class="fa-solid fa-heart"></i> Interests & Passions</h2>
     <div class="list">
       <div class="pill">Computer Usage & Coding</div>
       <div class="pill">Traveling & Exploring</div>
@@ -212,24 +212,51 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
     </div>
   </article>
 
-  <!-- About Me -->
-  <article class="card span-6">
+  <!-- Skills -->
+  <article class="card span-4">
     <div class="glow"></div>
-    <h2>About Me</h2>
-    <p style="margin:0;color:var(--muted)">Passionate about growth, creativity, and learning. Skilled in computer usage and loves traveling. Values honesty, teamwork, and perseverance.</p>
+    <h2><i class="fa-solid fa-code"></i> Skills</h2>
+    <div class="list">
+      <div class="pill">HTML</div>
+      <div class="pill">CSS</div>
+      <div class="pill">MS Office</div>
+      <div class="pill">MS Excel</div>
+    </div>  </article>
+
+  <!-- Education -->
+  <article class="card span-12">
+    <div class="glow"></div>
+    <h2><i class="fa-solid fa-school"></i> Education</h2>
+    <div class="fields">
+      <div class="field">
+        <div class="label">Primary Schools</div><div class="value">
+  <span style="color:#FF3B3B;">●</span> Everest Pre-Cadet School And College, Panchagarh <br>
+  <span style="color:#FF3B3B;">●</span> Hannan Sheikh Public School and College, Panchagarh
+</div>
+
+      </div>
+      <div class="field">
+        <div class="label">High School</div>
+        <div class="value">Bishnu Prashad Government High School, Panchagarh</div>
+      </div>
+      <div class="field">
+        <div class="label">College</div>
+        <div class="value">Barrister Jamir Uddin Sircar Collegiate Institute, Panchagarh</div>
+      </div>
+    </div>
   </article>
 
-  <!-- Goals -->
-  <article class="card span-6">
+  <!-- About Me -->
+  <article class="card span-12">
     <div class="glow"></div>
-    <h2>Goals</h2>
-    <p style="margin:0;color:var(--muted)">Currently exploring and defining future aspirations ⚽️</p>
+    <h2><i class="fa-solid fa-user"></i> About Me</h2>
+    <p style="margin:0;color:var(--muted)">Passionate about growth, creativity, and learning. Skilled in computer usage and loves traveling. Values honesty, teamwork, and perseverance.</p>
   </article>
 
 <!-- Contacts -->
 <article class="card span-12" id="contacts">
   <div class="glow"></div>
-  <h2>Contacts</h2>
+  <h2><i class="fa-solid fa-address-book"></i> Contacts</h2>
   <div class="links">
 
 <!-- Email -->
@@ -238,7 +265,6 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
   <div class="value">mdshadmanshakibsium@gmail.com</div>
   <div style="display:flex; gap:6px; margin-top:8px;">
     <button class="copy" data-copy="mdshadmanshakibsium@gmail.com">Copy</button>
-    <button class="open" data-link="mailto:mdshadmanshakibsium@gmail.com">Open</button>
   </div>
 </div>
 
@@ -321,26 +347,6 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
     <button class="open" data-link="https://t.me/shadman_shakib_sium">Open</button>
   </div>
 </div>
-
-<!-- Discord -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-discord"></i> Discord</div>
-  <div class="value">Brother Beast</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="@shadmanshakibsium">Copy</button>
-  </div>
-</div>
-
-<!-- Pinterest -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-pinterest"></i> Pinterest</div>
-  <div class="value">Shadman Shakib Sium</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="https://www.pinterest.com/shadmanshakibsium">Copy</button>
-    <button class="open" data-link="https://www.pinterest.com/shadmanshakibsium/">Open</button>
-  </div>
-</div>
-
   </div>
 </article>
 
@@ -348,7 +354,7 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
 <!-- Disclaimer -->
 <article class="card span-12">
   <div class="glow"></div>
-  <h2>Disclaimer</h2>
+  <h2><i class="fa-solid fa-circle-exclamation"></i> Disclaimer</h2>
   <div class="disclaimer">
     Hey there! 👋 This page is all about me—Shadman Shakib (Sium). The info here is 
     personal, sharing my interests, skills, and contacts. 
@@ -363,7 +369,7 @@ footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px
 </section>
 
 <footer>
-  <small>© <span id="year"></span> Shadman • Built with 💙 Neon-Glass design</small>
+  <small>© <span id="year"></span> Shadman • Built with 💙</small>
 </footer>
 </div>
 
