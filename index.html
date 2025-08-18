@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shadman • Bio</title>
+  <meta name="description" content="Ultra-styled one-page bio for Shadman Shakib (Sium)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root{
+      --bg: #080A12;
+      --card: rgba(255,255,255,0.06);
+      --card-strong: rgba(255,255,255,0.12);
+      --text: #EAF0FF;
+      --muted: #A6B1D8;
+      --accent: #69EACB;
+      --accent-2: #EACCF8;
+      --accent-3: #8EC5FC;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background: radial-gradient(1200px 800px at 10% -10%, #201A52 0%, transparent 60%),
+                                   radial-gradient(900px 600px at 110% 10%, #0C3B2E 0%, transparent 55%),
+                                   linear-gradient(160deg, #0b0e1a 0%, #0A0C17 40%, #0a0d18 100%);
+      color:var(--text);
+      font-family: 'Poppins', 'Noto Sans Bengali', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.6; letter-spacing:.2px;
+      overflow-x:hidden;
+    }
+    .plasma{
+      position:fixed; inset:-20vmax; z-index:-2; filter:blur(60px); opacity:.55;
+      background: conic-gradient(from 0deg, #5EFCE8, #736EFE, #FF7DE3, #5EFCE8);
+      animation: spin 18s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .stars::before, .stars::after{
+      content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background: radial-gradient(2px 2px at 20% 30%, #ffffff90, transparent 60%),
+                  radial-gradient(1px 1px at 60% 70%, #ffffff60, transparent 60%),
+                  radial-gradient(1.5px 1.5px at 80% 20%, #ffffff40, transparent 60%),
+                  radial-gradient(1.5px 1.5px at 35% 85%, #ffffff70, transparent 60%);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle{ 0%{opacity:.2} 100%{opacity:.7} }
+    .wrap{ max-width:1100px; margin:clamp(18px,4vw,40px) auto; padding:clamp(16px,3vw,28px); }
+    .header{
+      display:grid; grid-template-columns: 110px 1fr auto; gap:20px; align-items:center;
+      background:linear-gradient(180deg, var(--card-strong), rgba(255,255,255,0.04));
+      border:1px solid rgba(255,255,255,.12); border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:20px 24px; position:relative; isolation:isolate;
+    }
+    .header::after{
+      content:""; position:absolute; inset:-2px; z-index:-1; border-radius: calc(var(--radius) + 2px);
+      background: linear-gradient(120deg, var(--accent), var(--accent-2), var(--accent-3));
+      filter: blur(18px); opacity:.35;
+    }
+    .avatar{
+      width:96px; aspect-ratio:1; border-radius:50%;
+      background: linear-gradient(135deg, #69EACB 0%, #EACCF8 55%, #8EC5FC 100%);
+      display:grid; place-items:center; font-weight:900;
+      -webkit-mask: radial-gradient(circle at 30% 30%, black 62%, transparent 63%);
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,.18), 0 10px 40px rgba(0,0,0,.55);
+      color:#0b0e1a; text-shadow: 0 2px 10px rgba(255,255,255,.5);
+      letter-spacing:1px; user-select:none;
+    }
+    .avatar span{ font-size:28px; }
+    .title h1{ margin:0; font-size:clamp(22px,3.4vw,40px); font-weight:900; letter-spacing:.6px; }
+    .title .subtitle{ color:var(--muted); font-weight:500; margin-top:6px; }
+    .badges{ display:flex; gap:10px; flex-wrap:wrap; }
+    .badge{ padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(255,255,255,.18);
+            background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+            backdrop-filter: blur(6px);
+    }
+    .cta{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end; }
+    .btn{
+      border:none; cursor:pointer; padding:10px 14px; border-radius:14px; font-weight:700; font-size:14px;
+      background: linear-gradient(135deg, #69EACB, #EACCF8 50%, #8EC5FC);
+      color:#0a0d18; box-shadow: 0 10px 30px rgba(104, 234, 203, .25);
+      transition:.2s transform ease, .2s filter ease;
+    }
+    .btn:hover{ transform: translateY(-1px) scale(1.02); filter:saturate(1.1) }
+    .btn.alt{ background: rgba(255,255,255,.08); color:var(--text); border:1px solid rgba(255,255,255,.18) }
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; margin-top:22px; }
+    .card{
+      grid-column: span 12;
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,0.04));
+      border:1px solid rgba(255,255,255,.12); border-radius: var(--radius);
+      padding:20px; box-shadow: var(--shadow); position:relative; overflow:hidden;
+    }
+    .card .glow{ position:absolute; inset: -50% -30% auto auto; width:60%; height:60%; filter: blur(60px);
+                 background: radial-gradient(circle at top right, rgba(105,234,203,.25), transparent 60%); pointer-events:none; }
+    .card h2{ margin:0 0 12px; font-size: clamp(18px, 2.2vw, 26px); letter-spacing:.3px; }
+    .fields{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; }
+    .field{ padding:12px 12px; background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:14px; }
+    .label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px }
+    .value{ font-weight:700; margin-top:6px; word-break: break-word; }
+    .tags{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .tag{ padding:8px 12px; border-radius:999px; background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); font-weight:600; font-size:13px; }
+    .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:12px; }
+    .link-item{
+      display:flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap:8px;
+      padding:14px; 
+      border-radius:14px; 
+      background: rgba(255,255,255,.06); 
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    /* নতুন স্টাইল কপি / ওপেন বাটনের জন্য */
+    .copy, .open {
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(6px);
+      transition: 0.2s all ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .copy {
+      background: linear-gradient(135deg, #69EACB, #8EC5FC);
+      color: #0a0d18;
+      box-shadow: 0 4px 20px rgba(105, 234, 203, 0.25);
+    }
+    .copy:hover {
+      transform: translateY(-2px) scale(1.05);
+      filter: brightness(1.1);
+    }
+    .open {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .open:hover {
+      transform: translateY(-2px) scale(1.03);
+      filter: saturate(1.2);
+    }
+
+	.progress-bar{
+  width:100%; height:12px; background: rgba(255,255,255,.08);
+  border-radius:10px; overflow:hidden;
+}
+.progress{
+  height:100%; background: linear-gradient(135deg,#69EACB,#EACCF8,#8EC5FC);
+  border-radius:10px; transition: width 1s ease;
+}
+
+    .pill{ display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); }
+    .disclaimer{ font-size:13px; color:var(--muted); background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); padding:16px; border-radius:14px; }
+    footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px }
+    @media (min-width: 880px){
+      .card.span-4{ grid-column: span 4; }
+      .card.span-8{ grid-column: span 8; }
+      .card.span-6{ grid-column: span 6; }
+    }
+  </style>
+</head>
+<body>
+<div class="plasma"></div>
+<div class="stars"></div>
+<div class="wrap">
+<header class="header">
+  <div class="avatar"><span>SS</span></div>
+  <div class="title">
+    <h1>🌟 Biography of <span style="background:linear-gradient(90deg,#69EACB,#EACCF8,#8EC5FC); -webkit-background-clip:text; background-clip:text; color:transparent">Shadman Shakib (Sium)</span></h1>
+    <div class="subtitle">Panchagarh, Bangladesh 🇧🇩 • Islam 🌙</div>
+    <div class="badges">
+      <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Education: HSC Completed</span>
+      <span class="badge"><i class="fa-solid fa-cake-candles"></i> Born: 14th March 20**</span>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="btn" href="#contacts"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+    <button class="btn alt" id="printBtn"><i class="fa-solid fa-print"></i> Print</button>
+  </div>
+</header>
+
+<section class="grid">
+  <!-- Identity -->
+  <article class="card span-4">
+    <div class="glow"></div>
+    <h2>Identity</h2>
+    <div class="fields">
+      <div class="field"><div class="label">Full Name</div><div class="value">Shadman Shakib <span class="badge">Sium</span></div></div>
+      <div class="field"><div class="label">Country / District</div><div class="value">Bangladesh • Panchagarh</div></div>
+      <div class="field"><div class="label">Religion</div><div class="value">Islam 🌙</div></div>
+    </div>
+  </article>
+
+  <!-- About Me -->
+  <article class="card span-8">
+    <div class="glow"></div>
+    <h2>About Me</h2>
+    <p style="margin:0;color:var(--muted)">Passionate about growth, creativity, and learning. Skilled in computer usage and loves traveling. Values honesty, teamwork, and perseverance.</p>
+  </article>
+
+  <!-- Interests -->
+  <article class="card span-6">
+    <div class="glow"></div>
+    <h2>Interests & Passions</h2>
+    <div class="list">
+      <div class="pill">Computer Usage & Coding</div>
+      <div class="pill">Traveling & Exploring</div>
+      <div class="pill">Learning & Creativity</div>
+      <div class="pill">Teamwork & Honesty</div>
+    </div>
+  </article>
+
+  <!-- Goals -->
+  <article class="card span-6">
+    <div class="glow"></div>
+    <h2>Goals</h2>
+    <p style="margin:0;color:var(--muted)">Currently exploring and defining future aspirations ⚽️</p>
+  </article>
+
+<!-- Contacts -->
+<article class="card span-12" id="contacts">
+  <div class="glow"></div>
+  <h2>Contacts</h2>
+  <div class="links">
+
+<!-- Email -->
+<div class="link-item">
+  <div class="label"><i class="fas fa-envelope"></i> Email</div>
+  <div class="value">mdshadmanshakibsium@gmail.com</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="mdshadmanshakibsium@gmail.com">Copy</button>
+    <button class="open" data-link="mailto:mdshadmanshakibsium@gmail.com">Open</button>
+  </div>
+</div>
+
+<!-- Phone -->
+<div class="link-item">
+  <div class="label"><i class="fas fa-phone"></i> Phone</div>
+  <div class="value">+8801518******</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="+8801518938215">Copy</button>
+    <button class="open" data-link="tel:+8801518938215">Open</button>
+  </div>
+</div>
+
+<!-- WhatsApp -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+  <div class="value">+8801518******</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="+8801518938215">Copy</button>
+    <button class="open" data-link="https://wa.me/8801518938215">Open</button>
+  </div>
+</div>
+
+<!-- LinkedIn -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
+  <div class="value">MD Shadman Shakib Sium</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Copy</button>
+    <button class="open" data-link="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Open</button>
+  </div>
+</div>
+
+<!-- GitHub -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-github"></i> GitHub</div>
+  <div class="value">Shadman Shakib Sium</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="https://github.com/shadmanshakibsium">Copy</button>
+    <button class="open" data-link="https://github.com/shadmanshakibsium">Open</button>
+  </div>
+</div>
+
+
+<!-- Twitter / X -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-x-twitter"></i> Twitter / X</div>
+  <div class="value">Shadman Shakib Sium</div>
+  <div style="margin-top:8px;">
+    <button class="copy" data-copy="@ShadmanShakibX">Copy</button>
+    <button class="open" data-link="https://x.com/ShadmanShakibX">Open</button>
+  </div>
+</div>
+
+<!-- Facebook -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-facebook-f"></i> Facebook</div>
+  <div class="value">সাদমান সাকিব</div>
+  <div style="margin-top:8px;">
+    <button class="copy" data-copy="https://facebook.com/MdShadmanShakibSium">Copy</button>
+    <button class="open" data-link="https://facebook.com/MdShadmanShakibSium">Open</button>
+  </div>
+</div>
+
+<!-- Instagram -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-instagram"></i> Instagram</div>
+  <div class="value">@shadman_shakib_sium</div>
+  <div style="margin-top:8px;">
+    <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
+    <button class="open" data-link="https://instagram.com/shadman_shakib_sium">Open</button>
+  </div>
+</div>
+<!-- Telegram -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-telegram-plane"></i> Telegram</div>
+  <div class="value">Brother Beast</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
+    <button class="open" data-link="https://t.me/shadman_shakib_sium">Open</button>
+  </div>
+</div>
+
+<!-- Discord -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-discord"></i> Discord</div>
+  <div class="value">Brother Beast</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="@shadmanshakibsium">Copy</button>
+  </div>
+</div>
+
+<!-- Pinterest -->
+<div class="link-item">
+  <div class="label"><i class="fab fa-pinterest"></i> Pinterest</div>
+  <div class="value">Shadman Shakib Sium</div>
+  <div style="display:flex; gap:6px; margin-top:8px;">
+    <button class="copy" data-copy="https://www.pinterest.com/shadmanshakibsium">Copy</button>
+    <button class="open" data-link="https://www.pinterest.com/shadmanshakibsium/">Open</button>
+  </div>
+</div>
+
+  </div>
+</article>
+
+
+<!-- Disclaimer -->
+<article class="card span-12">
+  <div class="glow"></div>
+  <h2>Disclaimer</h2>
+  <div class="disclaimer">
+    Hey there! 👋 This page is all about me—Shadman Shakib (Sium). The info here is 
+    personal and meant for fun, sharing my interests, skills, and contacts. 
+
+    While I’ve tried to keep everything accurate, things can change over time. 
+    So, if you reach out or follow my links, do it respectfully and responsibly. 
+
+    Thanks for visiting my bio! ❤️ Keep learning, exploring, and spreading positivity. 🌟
+  </div>
+</article>
+
+</section>
+
+<footer>
+  <small>© <span id="year"></span> Shadman • Built with 💙 Neon-Glass design</small>
+</footer>
+</div>
+
+<script>
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy || '');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1100);
+      } catch (e) { btn.textContent = 'Failed'; }
+    });
+  });
+
+  // Open buttons
+  document.querySelectorAll('.open').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const link = btn.dataset.link;
+      if (link) window.open(link, '_blank');
+    });
+  });
+
+  document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
