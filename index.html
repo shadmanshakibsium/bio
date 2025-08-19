@@ -9,509 +9,470 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-<style>
 
-:root{
-  --bg: #000000; /* pure black */
-  --card: #111; 
-  --card-strong: #222;
-  --text: #EAF0FF;
-  --muted: #888;
-  --accent: #FF3B3B; /* red for buttons */
-  --shadow: 0 20px 60px rgba(0,0,0,.7);
-  --radius: 22px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; 
-  background: var(--bg);
-  color:var(--text);
-  font-family: 'Poppins', 'Noto Sans Bengali', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  line-height:1.6; letter-spacing:.2px;
-  overflow-x:hidden;
-}
+  <style>
+    :root{
+      --bg: #000000;
+      --card: #111;
+      --card-strong: #222;
+      --text: #EAF0FF;
+      --muted: #888;
+      --accent: #FF3B3B;
+      --shadow: 0 20px 60px rgba(0,0,0,.7);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html,body { height:100%; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color:var(--text);
+      font-family: 'Poppins','Noto Sans Bengali',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.6; letter-spacing:.2px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
 
-/* Remove plasma and stars for pure black */
-.plasma, .stars { display:none; }
+    .wrap{ max-width:1100px; margin:clamp(18px,4vw,40px) auto; padding:clamp(16px,3vw,28px); }
 
-/* ---------------- Header ---------------- */
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-  background: #111;
-  border:1px solid #222; 
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px 24px;
-}
+    /* Header */
+    .header {
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:16px;
+      background: #111;
+      border:1px solid #222;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:20px 24px;
+    }
+    .avatar{
+      flex:0 0 96px; width:96px; aspect-ratio:1; border-radius:50%;
+      background:#111; display:grid; place-items:center; font-weight:900; color:var(--accent);
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,.03), 0 10px 40px rgba(0,0,0,.7);
+    }
+    .title{ flex:1 1 300px; min-width:200px; }
+    .bio-heading { font-weight:900; line-height:1.2; font-size:clamp(20px,4vw,32px); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bio-heading span{ color:#FF0000; }
+    .subtitle{ color:var(--muted); font-weight:500; margin-top:6px; display:block; }
 
-.avatar{
-  flex: 0 0 96px; 
-  width: 96px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:#111;
-  display:grid; place-items:center; 
-  font-weight:900;
-  color:#FF3B3B;
-  box-shadow: inset 0 0 0 10px rgba(255,255,255,.1), 0 10px 40px rgba(0,0,0,.7);
-}
+    .cta{ display:flex; gap:10px; flex-shrink:0; margin-left:auto; }
+    .btn{ border:none; cursor:pointer; padding:10px 14px; border-radius:14px; font-weight:700; font-size:14px; background: var(--accent); color:#fff; box-shadow: 0 10px 30px rgba(255,59,59,.25); transition:.18s transform ease,.18s filter ease; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+    .btn:hover{ transform:translateY(-1px) scale(1.02); filter:brightness(1.05); }
 
-.title{
-  flex: 1 1 300px;
-  min-width: 200px;
-}
+    /* Grid */
+    .grid{ display:grid; grid-template-columns: repeat(12,1fr); gap:18px; margin-top:22px; }
+    .card{ grid-column: span 12; background:#111; border:1px solid #222; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+    h2{ margin:0 0 12px; font-size:clamp(18px,2.2vw,26px); letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
 
-.bio-heading {
-  font-weight: 900;
-  line-height: 1.2;
-  font-size: clamp(20px, 4vw, 32px);
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    /* Fields & pills */
+    .fields{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+    .field{ padding:12px; background:#222; border:1px solid #333; border-radius:14px; }
+    .label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px }
+    .value{ font-weight:700; margin-top:6px; word-break:break-word; }
+    .pill{ padding:10px 14px; border-radius:12px; background:#222; border:1px solid #333; font-weight:600; font-size:13px; }
 
-.bio-heading span {
-  color: #FF0000;
-}
+    /* Links grid (3 per row on desktop) */
+    .links{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap:12px;
+    }
+    @media (min-width: 1000px){
+      .links{ grid-template-columns: repeat(3, 1fr); } /* 3 per row on wide screens */
+    }
 
-.title .subtitle{ 
-  color:var(--muted); 
-  font-weight:500; 
-  margin-top:6px; 
-}
+    .link-item{
+      display:flex; flex-direction:column; align-items:flex-start; gap:8px;
+      padding:14px; border-radius:14px; background:#222; border:1px solid #333;
+      transform:translateY(0); transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .link-item:hover{ transform:translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.6); }
 
-.badges{ 
-  display:flex; 
-  gap:10px; 
-  flex-wrap:wrap; 
-  margin-top:6px;
-}
+    /* Buttons */
+    .btn-row{ display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+    .copy, .open {
+      padding:10px 14px; font-size:14px; border-radius:12px; border:none; cursor:pointer; font-weight:700;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .copy{ background:var(--accent); color:#fff; box-shadow: 0 8px 28px rgba(255,59,59,.18); }
+    .open{ background:#111; color:#fff; border:1px solid #222; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+    .copy:hover{ transform:translateY(-3px) scale(1.03); }
+    .open:hover{ transform:translateY(-3px) scale(1.03); }
 
-.badge{ 
-  padding:6px 10px; 
-  border-radius:999px; 
-  font-size:12px; 
-  border:1px solid #222;
-  background:#111;
-  color:#fff;
-}
-
-.cta{
-  display:flex; 
-  gap:10px; 
-  flex-shrink:0;
-  margin-left:auto;
-}
-
-.btn{
-  border:none; 
-  cursor:pointer; 
-  padding:10px 14px; 
-  border-radius:14px; 
-  font-weight:700; 
-  font-size:14px;
-  background: var(--accent);
-  color:#fff; 
-  box-shadow: 0 10px 30px rgba(255,59,59, .25);
-  transition:.2s transform ease, .2s filter ease;
-}
-.btn:hover{ 
-  transform: translateY(-1px) scale(1.02); 
-  filter: brightness(1.1); 
-}
-.btn.alt{
-  background: #111; 
-  color:var(--text); 
-  border:1px solid #222
-}
-
-/* ---------------- Responsive Header ---------------- */
-@media (max-width: 600px) {
-  .bio-heading {
-    font-size: 18px; /* মোবাইল স্ক্রীনে নাম ফিট হবে */
-    white-space: normal; /* লাইনে ভাঙবে প্রয়োজনে */
-  }
-  .cta {
-    width: 100%;
-    justify-content: flex-start;
-    margin-top: 12px;
-  }
-}
-
-/* ---------------- Grid & Cards ---------------- */
-.wrap{ max-width:1100px; margin:clamp(18px,4vw,40px) auto; padding:clamp(16px,3vw,28px); }
-
-.grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; margin-top:22px; }
-
-.card{
-  grid-column: span 12;
-  background:#111;
-  border:1px solid #222; border-radius: var(--radius);
-  padding:20px; box-shadow: var(--shadow); position:relative; overflow:hidden;
-}
-
-.card .glow{ display:none; }
-
-h2{ margin:0 0 12px; font-size: clamp(18px, 2.2vw, 26px); letter-spacing:.3px; }
-
-.fields{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; }
-.field{ padding:12px 12px; background:#222; border:1px solid #333; border-radius:14px; }
-.label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px }
-.value{ font-weight:700; margin-top:6px; word-break: break-word; }
-.tags{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-.tag{ padding:8px 12px; border-radius:999px; background:#222; border:1px solid #333; font-weight:600; font-size:13px; }
-
-/* ---------------- Links & Buttons ---------------- */
-.links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:12px; }
-.link-item{
-  display:flex; flex-direction: column; align-items: flex-start; gap:8px;
-  padding:14px; border-radius:14px; background:#222; border:1px solid #333;
-}
-
-/* Copy/Open Buttons */
-.copy, .open {
-  padding: 12px 18px;
-  font-size: 14px;
+    /* Toggle specific */
+.toggle-btn {
+  margin-left:12px;
+  background: var(--card-strong);
+  color: var(--text);
+  border: 1px solid #333;
+  padding: 10px 16px;
   border-radius: 14px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  font-size:14px;
+  transition: all .25s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
-.copy {
+
+.toggle-btn:hover {
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 6px 25px rgba(255,59,59,0.3);
-}
-.copy:hover {
-  transform: translateY(-3px) scale(1.07);
-  box-shadow: 0 8px 30px rgba(255,59,59,0.45);
-}
-.open {
-  background: #111;
-  color: #fff;
-  border:1px solid #222;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-.open:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255,59,59,.25);
 }
 
-/* ---------------- Interests & Pills ---------------- */
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.toggle-btn:active {
+  transform: scale(.96);
 }
 
-.pill {
-  padding: 10px 14px;
-  border-radius: 12px;
-  background:#222;
-  border:1px solid #333;
-  font-weight:600;
-  font-size:13px;
-  white-space: nowrap;
+.toggle-icon {
+  transition: transform .35s ease;
+}
+.toggle-rotated .toggle-icon {
+  transform: rotate(180deg);
 }
 
-.progress-bar{ width:100%; height:12px; background:#222; border-radius:10px; overflow:hidden; }
-.progress{ height:100%; background: var(--accent); border-radius:10px; transition: width 1s ease; }
 
-.pill{ display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:#222; border:1px solid #333; }
-.disclaimer{ font-size:13px; color:var(--muted); background:#222; border:1px solid #333; padding:16px; border-radius:14px; }
+    /* Slide animation area for social links */
+    .social-panel{
+      overflow:hidden;
+      transition: max-height .55s cubic-bezier(.2,.9,.3,1), opacity .45s ease;
+      max-height:0;
+      opacity:0;
+    }
+    .social-panel.open{
+      opacity:1;
+      max-height:2000px; /* sufficiently large */
+    }
 
-footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px }
+    /* small helpers */
+    .muted{ color:var(--muted); font-size:13px; }
+    .disclaimer{ font-size:13px; color:var(--muted); background:#222; border:1px solid #333; padding:16px; border-radius:14px; }
 
-/* ---------------- Grid spans ---------------- */
-@media (min-width: 880px){
-  .card.span-4{ grid-column: span 4; }
-  .card.span-8{ grid-column: span 8; }
-  .card.span-6{ grid-column: span 6; }
-}
-</style>
+    footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px }
 
+    /* Grid spans rules (keep your original span classes) */
+    @media (min-width: 880px){
+      .card.span-4{ grid-column: span 4; }
+      .card.span-8{ grid-column: span 8; }
+      .card.span-6{ grid-column: span 6; }
+      .card.span-12{ grid-column: span 12; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 700px){
+      .bio-heading{ white-space:normal; font-size:18px; }
+      .links{ grid-template-columns: repeat(1, 1fr); }
+    }
+  </style>
 </head>
 <body>
-<div class="plasma"></div>
-<div class="stars"></div>
-<div class="wrap">
-<header class="header">
-  <!-- Avatar -->
-  <div class="avatar"><span>SSS</span></div>
+  <div class="wrap">
+    <header class="header">
+      <div class="avatar"><span>SSS</span></div>
 
-  <!-- Title & Badges -->
-  <div class="title">
-    <h1 class="bio-heading">
-      Biography of <span>Shadman Shakib (Sium)</span>
-    </h1>
-    <div class="subtitle"></i> Student | Learner | Explorer</span>
-  </div>
-
-  <!-- Contact & Print -->
-  <div class="cta">
-    <a class="btn" href="#contacts"><i class="fa fa-phone"></i> Contact</a>
-  </div>
-</header>
-
-
-<section class="grid">
-  <!-- Identity -->
-  <article class="card span-4">
-    <div class="glow"></div>
-    <h2><i class="fa-solid fa-id-card"></i> Identity</h2>
-    <div class="fields">
-      <div class="field"><div class="label">Full Name</div><div class="value">Shadman Shakib <span class="badge">Sium</span></div></div>
-      <div class="field"><div class="label">Country / District</div><div class="value">Bangladesh • Panchagarh</div></div>
-      <div class="field"><div class="label">Religion</div><div class="value">Islam 🌙</div></div>
-      <div class="field"><div class="label">Born</div><div class="value">14th March 20**</div></div>
-    </div>
-  </article>
-
-
-  <!-- About Me -->
-  <article class="card span-4">
-    <div class="glow"></div>
-    <h2><i class="fa-solid fa-user"></i> About Me</h2>
-    <p style="margin:0;color:var(--muted)">Passionate about growth, creativity, and learning. Skilled in computer usage, enjoys traveling, and values honesty, teamwork, and perseverance. Always eager to face challenges and embrace new experiences.</p>
-  </article>
-
-  <!-- Skills -->
-  <article class="card span-4">
-    <div class="glow"></div>
-    <h2><i class="fa-solid fa-code"></i> Skills</h2>
-    <div class="list">
-      <div class="pill">HTML</div>
-      <div class="pill">CSS</div>
-      <div class="pill">Microsoft Office</div>
-      <div class="pill">Microsoft Excel</div>
-    </div>  </article>
-
-
-<!-- Projects -->
-<article class="card span-4" id="projects">
-  <div class="glow"></div>
-  <h2><i class="fa fa-experience"></i> Projects</h2>
-  <div class="links">
-
-<div class="link-item">
-  <div class="value">Project 01</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="open" data-link="https://bloodforpanchagarh.netlify.app">Open</button>
-  </div>
-</div>
-
-</article>
-
-<!-- Projects -->
-<article class="card span-4" id="projects">
-  <div class="glow"></div>
-  <h2><i class="fa fa-experience"></i> Projects</h2>
-  <div class="links">
-
-<div class="link-item">
-  <div class="value">Project 02</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="open" data-link="#">Open</button>
-  </div>
-</div>
-
-</article>
-
-<!-- Projects -->
-<article class="card span-4" id="projects">
-  <div class="glow"></div>
-  <h2><i class="fa fa-experience"></i> Projects</h2>
-  <div class="links">
-
-<div class="link-item">
-  <div class="value">Project 03</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="open" data-link="#">Open</button>
-  </div>
-</div>
-
-</article>
-
-  <!-- Interests -->
-  <article class="card span-12">
-    <div class="glow"></div>
-    <h2><i class="fa-solid fa-heart"></i> Interests & Passions</h2>
-    <div class="list">
-      <div class="pill">Computer Usage & Coding</div>
-      <div class="pill">Traveling & Exploring</div>
-      <div class="pill">Learning & Creativity</div>
-      <div class="pill">Teamwork & Honesty</div>
-    </div>
-  </article>
-
-  <!-- Education -->
-  <article class="card span-12">
-    <div class="glow"></div>
-    <h2><i class="fa-solid fa-school"></i> Education</h2>
-    <div class="fields">
-      <div class="field">
-        <div class="label">Primary Schools</div><div class="value">
-  <span style="color:#FF3B3B;">●</span> Everest Pre-Cadet School And College, Panchagarh <br>
-  <span style="color:#FF3B3B;">●</span> Hannan Sheikh Public School and College, Panchagarh
-</div>
-
+      <div class="title">
+        <h1 class="bio-heading">Biography of <span>Shadman Shakib (Sium)</span></h1>
+        <div class="subtitle">Student | Learner | Explorer</div>
       </div>
-      <div class="field">
-        <div class="label">High School</div>
-        <div class="value">Bishnu Prashad Government High School, Panchagarh</div>
+
+      <div class="cta">
+        <a class="btn" href="#contacts"><i class="fa fa-phone"></i> Contact</a>
       </div>
-      <div class="field">
-        <div class="label">College</div>
-        <div class="value">Barrister Jamir Uddin Sircar Collegiate Institute, Panchagarh</div>
-      </div>
-    </div>
-  </article>
+    </header>
 
-<!-- Contacts -->
-<article class="card span-12" id="contacts">
-  <div class="glow"></div>
-  <h2><i class="fa-solid fa-address-book"></i> Contacts</h2>
-  <div class="links">
+    <section class="grid" aria-live="polite">
 
-<!-- Email -->
-<div class="link-item">
-  <div class="label"><i class="fas fa-envelope"></i> Email</div>
-  <div class="value">mdshadmanshakibsium@gmail.com</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="mdshadmanshakibsium@gmail.com">Copy</button>
+      <!-- Identity -->
+      <article class="card span-4">
+        <h2><i class="fa-solid fa-id-card"></i> Identity</h2>
+        <div class="fields">
+          <div class="field"><div class="label">Full Name</div><div class="value">Shadman Shakib <span class="muted">Sium</span></div></div>
+          <div class="field"><div class="label">Country / District</div><div class="value">Bangladesh • Panchagarh</div></div>
+          <div class="field"><div class="label">Religion</div><div class="value">Islam 🌙</div></div>
+          <div class="field"><div class="label">Born</div><div class="value">14th March 20**</div></div>
+        </div>
+      </article>
+
+      <!-- About Me -->
+      <article class="card span-4">
+        <h2><i class="fa-solid fa-user"></i> About Me</h2>
+        <p class="muted" style="margin:0">Passionate about personal and professional growth, creativity, and continuous learning. Strong computer skills combined with a love for exploring new technologies and digital tools. Traveling provides opportunities to experience diverse cultures and broaden perspectives. Honesty, teamwork, and perseverance are highly valued in every endeavor. Constantly seeking new challenges, improving skills, and contributing positively to any environment. Curiosity and adaptability make learning fast and collaboration effective, while embracing new experiences fuels both personal and professional development.</p>
+      </article>
+
+      <!-- Skills -->
+      <article class="card span-4">
+        <h2><i class="fa-solid fa-code"></i> Skills</h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <div class="pill">HTML</div>
+          <div class="pill">CSS</div>
+          <div class="pill">Microsoft Office</div>
+          <div class="pill">Microsoft Excel</div>
+        </div>
+      </article>
+
+      <!-- Projects -->
+      <article class="card span-12" id="projects">
+        <h2><i class="fa fa-experience"></i> Projects</h2>
+        <div class="links">
+          <div class="link-item">
+            <div class="value">Project 01</div>
+            <div class="btn-row">
+              <button class="open" data-link="https://bloodforpanchagarh.netlify.app" aria-label="Open Project 01">Open</button>
+            </div>
+          </div>
+
+          <div class="link-item">
+            <div class="value">Project 02</div>
+            <div class="btn-row">
+              <button class="open" data-link="#" aria-label="Open Project 02">Open</button>
+            </div>
+          </div>
+
+          <div class="link-item">
+            <div class="value">Project 03</div>
+            <div class="btn-row">
+              <button class="open" data-link="#" aria-label="Open Project 03">Open</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Interests -->
+      <article class="card span-12">
+        <h2><i class="fa-solid fa-heart"></i> Interests & Passions</h2>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="pill">Computer Usage & Coding</div>
+          <div class="pill">Traveling & Exploring</div>
+          <div class="pill">Learning & Creativity</div>
+          <div class="pill">Teamwork & Honesty</div>
+        </div>
+      </article>
+
+      <!-- Education -->
+      <article class="card span-12">
+        <h2><i class="fa-solid fa-school"></i> Education</h2>
+        <div class="fields">
+          <div class="field">
+            <div class="label">Primary Schools</div>
+            <div class="value">
+              <span style="color:var(--accent)">●</span> Everest Pre-Cadet School And College, Panchagarh<br>
+              <span style="color:var(--accent)">●</span> Hannan Sheikh Public School and College, Panchagarh
+            </div>
+          </div>
+          <div class="field">
+            <div class="label">High School</div>
+            <div class="value">Bishnu Prashad Government High School, Panchagarh</div>
+          </div>
+          <div class="field">
+            <div class="label">College</div>
+            <div class="value">Barrister Jamir Uddin Sircar Collegiate Institute, Panchagarh</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Contacts -->
+      <article class="card span-12" id="contacts">
+        <h2><i class="fa-solid fa-address-book"></i> Contacts</h2>
+        <div class="links">
+          <!-- Email -->
+          <div class="link-item">
+            <div class="label"><i class="fas fa-envelope"></i> Email</div>
+            <div class="value">mdshadmanshakibsium@gmail.com</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="mdshadmanshakibsium@gmail.com" aria-label="Copy email">Copy</button>
+              <a class="open" href="mailto:mdshadmanshakibsium@gmail.com" style="text-decoration:none; display:inline-block; padding:10px 14px; border-radius:12px;">Open</a>
+            </div>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="link-item">
+            <div class="label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+            <div class="value">+8801518******</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="+8801518938215" aria-label="Copy WhatsApp number">Copy</button>
+              <button class="open" data-link="https://wa.me/8801518938215" aria-label="Open WhatsApp">Open</button>
+            </div>
+          </div>
+
+          <!-- Facebook -->
+          <div class="link-item">
+            <div class="label"><i class="fab fa-facebook-f"></i> Facebook</div>
+            <div class="value">সাদমান সাকিব</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="https://facebook.com/MdShadmanShakibSium" aria-label="Copy Facebook link">Copy</button>
+              <button class="open" data-link="https://facebook.com/MdShadmanShakibSium" aria-label="Open Facebook">Open</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Social Media (toggle panel) -->
+      <article class="card span-12" id="social-media">
+        <h2>
+          <i class="fab fa-share-alt"></i> Social Media Links
+          <button id="toggle-social" class="toggle-btn" aria-expanded="false" aria-controls="social-panel">
+            <span class="toggle-text">Show</span>
+            <span class="toggle-icon" aria-hidden="true"><i class="fa fa-chevron-down"></i></span>
+          </button>
+        </h2>
+
+        <div id="social-panel" class="social-panel" aria-hidden="true">
+          <div class="links" style="margin-top:10px;">
+            <div class="link-item">
+              <div class="label"><i class="fas fa-phone"></i> Phone</div>
+              <div class="value">+8801518******</div>
+              <div class="btn-row">
+                <button class="copy" data-copy="+8801518938215" aria-label="Copy phone number">Copy</button>
+                <button class="open" data-link="tel:+8801518938215" aria-label="Call">Open</button>
+              </div>
+            </div>
+
+            <div class="link-item">
+              <div class="label"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
+              <div class="value">MD Shadman Shakib Sium</div>
+              <div class="btn-row">
+                <button class="copy" data-copy="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/" aria-label="Copy LinkedIn">Copy</button>
+                <button class="open" data-link="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/" aria-label="Open LinkedIn">Open</button>
+              </div>
+            </div>
+
+            <div class="link-item">
+              <div class="label"><i class="fab fa-github"></i> GitHub</div>
+              <div class="value">Shadman Shakib Sium</div>
+              <div class="btn-row">
+                <button class="copy" data-copy="https://github.com/shadmanshakibsium" aria-label="Copy GitHub">Copy</button>
+                <button class="open" data-link="https://github.com/shadmanshakibsium" aria-label="Open GitHub">Open</button>
+              </div>
+            </div>
+
+            <div class="link-item">
+              <div class="label"><i class="fab fa-x-twitter"></i> Twitter / X</div>
+              <div class="value">@ShadmanShakibX</div>
+              <div class="btn-row">
+                <button class="copy" data-copy="@ShadmanShakibX" aria-label="Copy Twitter handle">Copy</button>
+                <button class="open" data-link="https://x.com/ShadmanShakibX" aria-label="Open Twitter">Open</button>
+              </div>
+            </div>
+
+            <div class="link-item">
+              <div class="label"><i class="fab fa-instagram"></i> Instagram</div>
+              <div class="value">@shadman_shakib_sium</div>
+              <div class="btn-row">
+                <button class="copy" data-copy="@shadman_shakib_sium" aria-label="Copy Instagram">Copy</button>
+                <button class="open" data-link="https://instagram.com/shadman_shakib_sium" aria-label="Open Instagram">Open</button>
+              </div>
+            </div>
+
+            <div class="link-item">
+              <div class="label"><i class="fab fa-telegram-plane"></i> Telegram</div>
+              <div class="value">Brother Beast</div>
+              <div class="btn-row">
+                <button class="copy" data-copy="@shadman_shakib_sium" aria-label="Copy Telegram">Copy</button>
+                <button class="open" data-link="https://t.me/shadman_shakib_sium" aria-label="Open Telegram">Open</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Disclaimer -->
+      <article class="card span-12">
+        <h2><i class="fa-solid fa-circle-exclamation"></i> Disclaimer</h2>
+        <div class="disclaimer">
+          Hey there! 👋 This page is all about me—Shadman Shakib (Sium). The info here is personal, sharing my interests, skills, and contacts.
+          While I’ve tried to keep everything accurate, things can change over time. So, if you reach out or follow my links, do it respectfully and responsibly.
+          Thanks for visiting my bio! ❤️ Keep learning, exploring, and spreading positivity. 🌟
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      <small>© <span id="year"></span> Shadman • All rights reserved.</small>
+    </footer>
   </div>
-</div>
 
-<!-- Phone -->
-<div class="link-item">
-  <div class="label"><i class="fas fa-phone"></i> Phone</div>
-  <div class="value">+8801518******</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="+8801518938215">Copy</button>
-    <button class="open" data-link="tel:+8801518938215">Open</button>
-  </div>
-</div>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-<!-- WhatsApp -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
-  <div class="value">+8801518******</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="+8801518938215">Copy</button>
-    <button class="open" data-link="https://wa.me/8801518938215">Open</button>
-  </div>
-</div>
+    // Copy buttons (delegation)
+    document.addEventListener('click', async function(e){
+      const t = e.target;
+      if (t.classList.contains('copy')) {
+        const text = t.dataset.copy || '';
+        try {
+          await navigator.clipboard.writeText(text);
+          const prev = t.innerHTML;
+          t.innerHTML = 'Copied!';
+          t.disabled = true;
+          setTimeout(() => { t.innerHTML = prev; t.disabled = false; }, 1100);
+        } catch(err) {
+          t.innerHTML = 'Failed';
+          setTimeout(() => { t.innerHTML = 'Copy'; }, 1200);
+        }
+      }
 
-<!-- LinkedIn -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
-  <div class="value">MD Shadman Shakib Sium</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Copy</button>
-    <button class="open" data-link="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Open</button>
-  </div>
-</div>
-
-<!-- GitHub -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-github"></i> GitHub</div>
-  <div class="value">Shadman Shakib Sium</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="https://github.com/shadmanshakibsium">Copy</button>
-    <button class="open" data-link="https://github.com/shadmanshakibsium">Open</button>
-  </div>
-</div>
-
-
-<!-- Twitter / X -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-x-twitter"></i> Twitter / X</div>
-  <div class="value">Shadman Shakib Sium</div>
-  <div style="margin-top:8px;">
-    <button class="copy" data-copy="@ShadmanShakibX">Copy</button>
-    <button class="open" data-link="https://x.com/ShadmanShakibX">Open</button>
-  </div>
-</div>
-
-<!-- Facebook -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-facebook-f"></i> Facebook</div>
-  <div class="value">সাদমান সাকিব</div>
-  <div style="margin-top:8px;">
-    <button class="copy" data-copy="https://facebook.com/MdShadmanShakibSium">Copy</button>
-    <button class="open" data-link="https://facebook.com/MdShadmanShakibSium">Open</button>
-  </div>
-</div>
-
-<!-- Instagram -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-instagram"></i> Instagram</div>
-  <div class="value">@shadman_shakib_sium</div>
-  <div style="margin-top:8px;">
-    <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
-    <button class="open" data-link="https://instagram.com/shadman_shakib_sium">Open</button>
-  </div>
-</div>
-<!-- Telegram -->
-<div class="link-item">
-  <div class="label"><i class="fab fa-telegram-plane"></i> Telegram</div>
-  <div class="value">Brother Beast</div>
-  <div style="display:flex; gap:6px; margin-top:8px;">
-    <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
-    <button class="open" data-link="https://t.me/shadman_shakib_sium">Open</button>
-  </div>
-</div>
-  </div>
-</article>
-
-
-<!-- Disclaimer -->
-<article class="card span-12">
-  <div class="glow"></div>
-  <h2><i class="fa-solid fa-circle-exclamation"></i> Disclaimer</h2>
-  <div class="disclaimer">
-    Hey there! 👋 This page is all about me—Shadman Shakib (Sium). The info here is 
-    personal, sharing my interests, skills, and contacts. 
-
-    While I’ve tried to keep everything accurate, things can change over time. 
-    So, if you reach out or follow my links, do it respectfully and responsibly. 
-
-    Thanks for visiting my bio! ❤️ Keep learning, exploring, and spreading positivity. 🌟
-  </div>
-</article>
-
-</section>
-
-<footer>
-  <small>© <span id="year"></span> Shadman • All rights reserved.</small>
-</footer>
-</div>
-
-<script>
-  // Copy buttons
-  document.querySelectorAll('.copy').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(btn.dataset.copy || '');
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 1100);
-      } catch (e) { btn.textContent = 'Failed'; }
+      // Open buttons
+      if (t.classList.contains('open')) {
+        const link = t.dataset.link || t.getAttribute('href') || '';
+        if (!link) return;
+        // If tel: or mailto: or normal URL
+        try {
+          // For external links open in new tab
+          if (link.startsWith('http') || link.startsWith('https')) {
+            window.open(link, '_blank', 'noopener');
+          } else {
+            // tel: or mailto:
+            window.location.href = link;
+          }
+        } catch(e) { console.warn(e); }
+      }
     });
-  });
 
-  // Open buttons
-  document.querySelectorAll('.open').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const link = btn.dataset.link;
-      if (link) window.open(link, '_blank');
-    });
-  });
+    // Toggle social panel with smooth slide using measured height
+    (function(){
+      const toggle = document.getElementById('toggle-social');
+      const panel = document.getElementById('social-panel');
 
-  document.getElementById('printBtn')?.addEventListener('click', () => window.print());
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+      function openPanel(){
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.classList.add('toggle-rotated');
+        toggle.querySelector('.toggle-text').textContent = 'Hide';
+      }
+      function closePanel(){
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('toggle-rotated');
+        toggle.querySelector('.toggle-text').textContent = 'Show';
+      }
+
+      // initial closed
+      closePanel();
+
+      toggle.addEventListener('click', function(){
+        if (panel.classList.contains('open')) closePanel();
+        else openPanel();
+      });
+
+      // allow Enter/Space to toggle when focused
+      toggle.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
