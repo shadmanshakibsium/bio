@@ -21,6 +21,7 @@
       --shadow: 0 20px 60px rgba(0,0,0,.7);
       --radius: 22px;
     }
+
     * { box-sizing: border-box; }
     html,body { height:100%; }
     body{
@@ -32,6 +33,7 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
+      transition: background .3s, color .3s;
     }
 
     .wrap{ max-width:1100px; margin:clamp(18px,4vw,40px) auto; padding:clamp(16px,3vw,28px); }
@@ -47,16 +49,18 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:20px 24px;
+      animation: fadeInDown 1s ease;
     }
     .avatar{
       flex:0 0 96px; width:96px; aspect-ratio:1; border-radius:50%;
       background:#111; display:grid; place-items:center; font-weight:900; color:var(--accent);
       box-shadow: inset 0 0 0 10px rgba(255,255,255,.03), 0 10px 40px rgba(0,0,0,.7);
+      animation: pop 0.8s ease;
     }
     .title{ flex:1 1 300px; min-width:200px; }
-    .bio-heading { font-weight:900; line-height:1.2; font-size:clamp(20px,4vw,32px); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bio-heading { font-weight:900; line-height:1.2; font-size:clamp(20px,4vw,32px); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; animation: fadeIn 1.2s ease forwards; opacity:0; }
     .bio-heading span{ color:#FF0000; }
-    .subtitle{ color:var(--muted); font-weight:500; margin-top:6px; display:block; }
+    .subtitle{ color:var(--muted); font-weight:500; margin-top:6px; display:block; animation: fadeIn 1.4s ease forwards; opacity:0; }
 
     .cta{ display:flex; gap:10px; flex-shrink:0; margin-left:auto; }
     .btn{ border:none; cursor:pointer; padding:10px 14px; border-radius:14px; font-weight:700; font-size:14px; background: var(--accent); color:#fff; box-shadow: 0 10px 30px rgba(255,59,59,.25); transition:.18s transform ease,.18s filter ease; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
@@ -64,7 +68,29 @@
 
     /* Grid */
     .grid{ display:grid; grid-template-columns: repeat(12,1fr); gap:18px; margin-top:22px; }
-    .card{ grid-column: span 12; background:#111; border:1px solid #222; border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+
+    .card{
+      background:#111;
+      border:1px solid #222;
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      animation: fadeInUp 1s ease forwards;
+      opacity:0;
+    }
+
+    /* Card span rules for all screens */
+    .card.span-4 { grid-column: span 4; }
+    .card.span-6 { grid-column: span 6; }
+    .card.span-8 { grid-column: span 8; }
+    .card.span-12 { grid-column: span 12; }
+
+    @media (max-width: 880px){
+      .card.span-4, .card.span-6, .card.span-8 { grid-column: span 12; }
+    }
+
     h2{ margin:0 0 12px; font-size:clamp(18px,2.2vw,26px); letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
 
     /* Fields & pills */
@@ -72,17 +98,13 @@
     .field{ padding:12px; background:#222; border:1px solid #333; border-radius:14px; }
     .label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px }
     .value{ font-weight:700; margin-top:6px; word-break:break-word; }
-    .pill{ padding:10px 14px; border-radius:12px; background:#222; border:1px solid #333; font-weight:600; font-size:13px; }
+    .pill{ padding:10px 14px; border-radius:12px; background:#222; border:1px solid #333; font-weight:600; font-size:13px; transition:.25s all ease; }
+    .pill:hover{ background:var(--accent); color:#fff; transform:scale(1.05); }
 
-    /* Links grid (3 per row on desktop) */
-    .links{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-      gap:12px;
-    }
-    @media (min-width: 1000px){
-      .links{ grid-template-columns: repeat(3, 1fr); } /* 3 per row on wide screens */
-    }
+    /* Links grid */
+    .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:12px; }
+    @media (min-width: 1000px){ .links{ grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px){ .links{ grid-template-columns: 1fr; } }
 
     .link-item{
       display:flex; flex-direction:column; align-items:flex-start; gap:8px;
@@ -103,41 +125,11 @@
     .open:hover{ transform:translateY(-3px) scale(1.03); }
 
     /* Toggle specific */
-.toggle-btn {
-  margin-left:12px;
-  background: var(--card-strong);
-  color: var(--text);
-  border: 1px solid #333;
-  padding: 10px 16px;
-  border-radius: 14px;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-weight:600;
-  font-size:14px;
-  transition: all .25s ease;
-  box-shadow: 0 6px 18px rgba(0,0,0,.35);
-}
-
-.toggle-btn:hover {
-  background: var(--accent);
-  color: #fff;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 25px rgba(255,59,59,.25);
-}
-
-.toggle-btn:active {
-  transform: scale(.96);
-}
-
-.toggle-icon {
-  transition: transform .35s ease;
-}
-.toggle-rotated .toggle-icon {
-  transform: rotate(180deg);
-}
-
+    .toggle-btn { margin-left:12px; background: var(--card-strong); color: var(--text); border: 1px solid #333; padding: 10px 16px; border-radius: 14px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-weight:600; font-size:14px; transition: all .25s ease; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .toggle-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 25px rgba(255,59,59,.25); }
+    .toggle-btn:active { transform: scale(.96); }
+    .toggle-icon { transition: transform .35s ease; }
+    .toggle-rotated .toggle-icon { transform: rotate(180deg); }
 
     /* Slide animation area for social links */
     .social-panel{
@@ -146,10 +138,7 @@
       max-height:0;
       opacity:0;
     }
-    .social-panel.open{
-      opacity:1;
-      max-height:2000px; /* sufficiently large */
-    }
+    .social-panel.open{ opacity:1; max-height:2000px; }
 
     /* small helpers */
     .muted{ color:var(--muted); font-size:13px; }
@@ -157,38 +146,28 @@
 
     footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px }
 
-    /* Grid spans rules (keep your original span classes) */
-    @media (min-width: 880px){
-      .card.span-4{ grid-column: span 4; }
-      .card.span-8{ grid-column: span 8; }
-      .card.span-6{ grid-column: span 6; }
-      .card.span-12{ grid-column: span 12; }
-    }
+    /* Animations */
+    @keyframes fadeInDown { from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
+    @keyframes fadeInUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes pop { from{transform:scale(0);} to{transform:scale(1);} }
 
-    /* Responsive adjustments */
-    @media (max-width: 700px){
-      .bio-heading{ white-space:normal; font-size:18px; }
-      .links{ grid-template-columns: repeat(1, 1fr); }
-    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="header">
       <div class="avatar"><span>SSS</span></div>
-
       <div class="title">
         <h1 class="bio-heading">Biography of <span>Shadman Shakib (Sium)</span></h1>
         <div class="subtitle">Student | Learner | Explorer</div>
       </div>
-
       <div class="cta">
         <a class="btn" href="#contacts"><i class="fa fa-phone"></i> Contact</a>
       </div>
     </header>
 
     <section class="grid" aria-live="polite">
-
       <!-- Identity -->
       <article class="card span-4">
         <h2><i class="fa-solid fa-id-card"></i> Identity</h2>
@@ -414,75 +393,31 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Copy buttons (delegation)
+    // Copy and Open buttons
     document.addEventListener('click', async function(e){
       const t = e.target;
       if (t.classList.contains('copy')) {
         const text = t.dataset.copy || '';
-        try {
-          await navigator.clipboard.writeText(text);
-          const prev = t.innerHTML;
-          t.innerHTML = 'Copied!';
-          t.disabled = true;
-          setTimeout(() => { t.innerHTML = prev; t.disabled = false; }, 1100);
-        } catch(err) {
-          t.innerHTML = 'Failed';
-          setTimeout(() => { t.innerHTML = 'Copy'; }, 1200);
-        }
+        try { await navigator.clipboard.writeText(text); const prev = t.innerHTML; t.innerHTML='Copied!'; t.disabled=true; setTimeout(()=>{t.innerHTML=prev; t.disabled=false;},1100); } 
+        catch(err){ t.innerHTML='Failed'; setTimeout(()=>{t.innerHTML='Copy';},1200); }
       }
-
-      // Open buttons
-      if (t.classList.contains('open')) {
+      if (t.classList.contains('open')){
         const link = t.dataset.link || t.getAttribute('href') || '';
-        if (!link) return;
-        // If tel: or mailto: or normal URL
-        try {
-          // For external links open in new tab
-          if (link.startsWith('http') || link.startsWith('https')) {
-            window.open(link, '_blank', 'noopener');
-          } else {
-            // tel: or mailto:
-            window.location.href = link;
-          }
-        } catch(e) { console.warn(e); }
+        if(!link) return;
+        if(link.startsWith('http') || link.startsWith('https')) window.open(link,'_blank','noopener');
+        else window.location.href=link;
       }
     });
 
-    // Toggle social panel with smooth slide using measured height
+    // Toggle social panel
     (function(){
       const toggle = document.getElementById('toggle-social');
       const panel = document.getElementById('social-panel');
-
-      function openPanel(){
-        panel.classList.add('open');
-        panel.setAttribute('aria-hidden', 'false');
-        toggle.setAttribute('aria-expanded', 'true');
-        toggle.classList.add('toggle-rotated');
-        toggle.querySelector('.toggle-text').textContent = 'Hide';
-      }
-      function closePanel(){
-        panel.classList.remove('open');
-        panel.setAttribute('aria-hidden', 'true');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.classList.remove('toggle-rotated');
-        toggle.querySelector('.toggle-text').textContent = 'Show';
-      }
-
-      // initial closed
+      function openPanel(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); toggle.setAttribute('aria-expanded','true'); toggle.classList.add('toggle-rotated'); toggle.querySelector('.toggle-text').textContent='Hide'; }
+      function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); toggle.setAttribute('aria-expanded','false'); toggle.classList.remove('toggle-rotated'); toggle.querySelector('.toggle-text').textContent='Show'; }
       closePanel();
-
-      toggle.addEventListener('click', function(){
-        if (panel.classList.contains('open')) closePanel();
-        else openPanel();
-      });
-
-      // allow Enter/Space to toggle when focused
-      toggle.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggle.click();
-        }
-      });
+      toggle.addEventListener('click',()=>{ panel.classList.contains('open')? closePanel():openPanel(); });
+      toggle.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle.click(); } });
     })();
   </script>
 </body>
