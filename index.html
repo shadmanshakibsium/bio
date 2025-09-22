@@ -152,6 +152,20 @@
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
     @keyframes pop { from{transform:scale(0);} to{transform:scale(1);} }
 
+    /* Prevent text selection */
+body, * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevent image dragging */
+img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
   </style>
 </head>
 <body>
@@ -174,7 +188,7 @@
         <div class="fields">
           <div class="field"><div class="label">Full Name</div><div class="value">Shadman Shakib <span class="muted">Sium</span></div></div>
           <div class="field"><div class="label">Country / District</div><div class="value">Bangladesh • Panchagarh</div></div>
-          <div class="field"><div class="label">Religion</div><div class="value">Islam 🌙</div></div>
+          <div class="field"><div class="label">Religion</div><div class="value">Islam 🇸🇦</div></div>
           <div class="field"><div class="label">Born</div><div class="value">14th March 20**</div></div>
         </div>
       </article>
@@ -192,7 +206,7 @@
           <div class="pill">HTML</div>
           <div class="pill">CSS</div>
           <div class="pill">JavaScript</div>
-          <div class="pill">IT Config Wizard</div>
+          <div class="pill">System Management💻</div>
           <div class="pill">Microsoft Office</div>
           <div class="pill">Microsoft Excel</div>
         </div>
@@ -370,6 +384,51 @@
       toggle.addEventListener('click',()=>{ panel.classList.contains('open')? closePanel():openPanel(); });
       toggle.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle.click(); } });
     })();
+
+      // DevTools detection and blur effect
+  let devtoolsOpen = false;
+  const threshold = 150;
+
+  function checkDevTools() {
+    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+
+    if (widthThreshold || heightThreshold) {
+      if (!devtoolsOpen) {
+        document.body.style.filter = 'blur(5px)';
+        document.body.style.pointerEvents = 'none';
+        devtoolsOpen = true;
+        console.log('DevTools detected!');
+      }
+    } else {
+      if (devtoolsOpen) {
+        document.body.style.filter = 'none';
+        document.body.style.pointerEvents = 'auto';
+        devtoolsOpen = false;
+      }
+    }
+  }
+
+  setInterval(checkDevTools, 500);
+
+  // Disable right click
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  // Disable common keyboard shortcuts
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey && ['u', 's', 'c', 'a'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+    if (e.key === 'PrintScreen') {
+      navigator.clipboard.writeText('');
+      alert('Screenshot blocked!');
+    }
+  });
   </script>
 </body>
 </html>
