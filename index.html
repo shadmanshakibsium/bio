@@ -81,7 +81,6 @@
       opacity:0;
     }
 
-    /* Card span rules for all screens */
     .card.span-4 { grid-column: span 4; }
     .card.span-6 { grid-column: span 6; }
     .card.span-8 { grid-column: span 8; }
@@ -93,7 +92,6 @@
 
     h2{ margin:0 0 12px; font-size:clamp(18px,2.2vw,26px); letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
 
-    /* Fields & pills */
     .fields{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
     .field{ padding:12px; background:#222; border:1px solid #333; border-radius:14px; }
     .label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px }
@@ -101,7 +99,6 @@
     .pill{ padding:10px 14px; border-radius:12px; background:#222; border:1px solid #333; font-weight:600; font-size:13px; transition:.25s all ease; }
     .pill:hover{ background:var(--accent); color:#fff; transform:scale(1.05); }
 
-    /* Links grid */
     .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:12px; }
     @media (min-width: 1000px){ .links{ grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 700px){ .links{ grid-template-columns: 1fr; } }
@@ -113,7 +110,6 @@
     }
     .link-item:hover{ transform:translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.6); }
 
-    /* Buttons */
     .btn-row{ display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
     .copy, .open {
       padding:10px 14px; font-size:14px; border-radius:12px; border:none; cursor:pointer; font-weight:700;
@@ -124,14 +120,12 @@
     .copy:hover{ transform:translateY(-3px) scale(1.03); }
     .open:hover{ transform:translateY(-3px) scale(1.03); }
 
-    /* Toggle specific */
     .toggle-btn { margin-left:12px; background: var(--card-strong); color: var(--text); border: 1px solid #333; padding: 10px 16px; border-radius: 14px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-weight:600; font-size:14px; transition: all .25s ease; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
     .toggle-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 25px rgba(255,59,59,.25); }
     .toggle-btn:active { transform: scale(.96); }
     .toggle-icon { transition: transform .35s ease; }
     .toggle-rotated .toggle-icon { transform: rotate(180deg); }
 
-    /* Slide animation area for social links */
     .social-panel{
       overflow:hidden;
       transition: max-height .55s cubic-bezier(.2,.9,.3,1), opacity .45s ease;
@@ -140,19 +134,16 @@
     }
     .social-panel.open{ opacity:1; max-height:2000px; }
 
-    /* small helpers */
     .muted{ color:var(--muted); font-size:13px; }
     .disclaimer{ font-size:13px; color:var(--muted); background:#222; border:1px solid #333; padding:16px; border-radius:14px; }
 
     footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px }
 
-    /* Animations */
     @keyframes fadeInDown { from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
     @keyframes fadeInUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
     @keyframes pop { from{transform:scale(0);} to{transform:scale(1);} }
 
-    /* Prevent text selection */
 body, * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -160,7 +151,6 @@ body, * {
   user-select: none;
 }
 
-/* Prevent image dragging */
 img {
   pointer-events: none;
   -webkit-user-drag: none;
