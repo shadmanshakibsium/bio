@@ -1,435 +1,534 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>About • Shadman</title>
-  <meta name="description" content="Ultra-styled one-page bio for Shadman Shakib (Sium)." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous"/>
 
-  <style>
-    :root{
-      --bg: #000000;
-      --card: #111;
-      --card-strong: #222;
-      --text: #EAF0FF;
-      --muted: #888;
-      --accent: #FF3B3B;
-      --shadow: 0 20px 60px rgba(0,0,0,.7);
-      --radius: 22px;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow-x:hidden}
 
-    * { box-sizing: border-box; }
-    html,body { height:100%; }
-    body{
-      margin:0;
-      background: var(--bg);
-      color:var(--text);
-      font-family: 'Poppins','Noto Sans Bengali',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      line-height:1.6; letter-spacing:.2px;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-      transition: background .3s, color .3s;
-    }
+/* ── INTRO ── */
+#intro{
+  position:fixed;inset:0;z-index:9000;
+  background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;cursor:none;
+}
+#intro::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 4px);
+  animation:scanMove 8s linear infinite;
+}
+@keyframes scanMove{from{background-position:0 0}to{background-position:0 100px}}
+#intro::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.85) 100%);
+}
+.bg-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(0,255,100,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,100,.04) 1px,transparent 1px);
+  background-size:40px 40px;
+  animation:gridPulse 4s ease-in-out infinite;
+}
+@keyframes gridPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.intro-inner{position:relative;z-index:4;text-align:center;}
+.boot-lines{
+  font-family:'Share Tech Mono',monospace;color:rgba(0,255,100,.55);
+  font-size:clamp(10px,1.2vw,13px);text-align:left;
+  margin-bottom:32px;min-height:60px;letter-spacing:.5px;line-height:1.8;
+}
+.boot-line{display:block;opacity:0;transform:translateX(-10px);transition:opacity .2s,transform .2s}
+.boot-line.show{opacity:1;transform:none}
+.big-name{
+  font-family:'Share Tech Mono',monospace;
+  font-size:clamp(48px,10vw,120px);font-weight:400;color:#0f0;
+  letter-spacing:clamp(8px,2vw,28px);text-transform:uppercase;line-height:1;
+  text-shadow:0 0 10px rgba(0,255,0,.8),0 0 40px rgba(0,255,0,.4),0 0 80px rgba(0,255,0,.2);
+  position:relative;
+}
+.cursor{
+  display:inline-block;width:.6em;height:1em;background:#0f0;
+  margin-left:4px;vertical-align:bottom;
+  animation:blink .6s step-end infinite;
+  box-shadow:0 0 12px #0f0,0 0 30px rgba(0,255,0,.5);
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-    .wrap{ max-width:1100px; margin:clamp(18px,4vw,40px) auto; padding:clamp(16px,3vw,28px); }
-
-    /* Header */
-    .header {
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      gap:16px;
-      background: #111;
-      border:1px solid #222;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:20px 24px;
-      animation: fadeInDown 1s ease;
-    }
-    .avatar{
-      flex:0 0 96px; width:96px; aspect-ratio:1; border-radius:50%;
-      background:#111; display:grid; place-items:center; font-weight:900; color:var(--accent);
-      box-shadow: inset 0 0 0 10px rgba(255,255,255,.03), 0 10px 40px rgba(0,0,0,.7);
-      animation: pop 0.8s ease;
-    }
-    .title{ flex:1 1 300px; min-width:200px; }
-    .bio-heading { font-weight:900; line-height:1.2; font-size:clamp(20px,4vw,32px); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; animation: fadeIn 1.2s ease forwards; opacity:0; }
-    .bio-heading span{ color:#FF0000; }
-    .subtitle{ color:var(--muted); font-weight:500; margin-top:6px; display:block; animation: fadeIn 1.4s ease forwards; opacity:0; }
-
-    .cta{ display:flex; gap:10px; flex-shrink:0; margin-left:auto; }
-    .btn{ border:none; cursor:pointer; padding:10px 14px; border-radius:14px; font-weight:700; font-size:14px; background: var(--accent); color:#fff; box-shadow: 0 10px 30px rgba(255,59,59,.25); transition:.18s transform ease,.18s filter ease; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
-    .btn:hover{ transform:translateY(-1px) scale(1.02); filter:brightness(1.05); }
-
-    /* Grid */
-    .grid{ display:grid; grid-template-columns: repeat(12,1fr); gap:18px; margin-top:22px; }
-
-    .card{
-      background:#111;
-      border:1px solid #222;
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-      animation: fadeInUp 1s ease forwards;
-      opacity:0;
-    }
-
-    .card.span-4 { grid-column: span 4; }
-    .card.span-6 { grid-column: span 6; }
-    .card.span-8 { grid-column: span 8; }
-    .card.span-12 { grid-column: span 12; }
-
-    @media (max-width: 880px){
-      .card.span-4, .card.span-6, .card.span-8 { grid-column: span 12; }
-    }
-
-    h2{ margin:0 0 12px; font-size:clamp(18px,2.2vw,26px); letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
-
-    .fields{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
-    .field{ padding:12px; background:#222; border:1px solid #333; border-radius:14px; }
-    .label{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px }
-    .value{ font-weight:700; margin-top:6px; word-break:break-word; }
-    .pill{ padding:10px 14px; border-radius:12px; background:#222; border:1px solid #333; font-weight:600; font-size:13px; transition:.25s all ease; }
-    .pill:hover{ background:var(--accent); color:#fff; transform:scale(1.05); }
-
-    .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:12px; }
-    @media (min-width: 1000px){ .links{ grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 700px){ .links{ grid-template-columns: 1fr; } }
-
-    .link-item{
-      display:flex; flex-direction:column; align-items:flex-start; gap:8px;
-      padding:14px; border-radius:14px; background:#222; border:1px solid #333;
-      transform:translateY(0); transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .link-item:hover{ transform:translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.6); }
-
-    .btn-row{ display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
-    .copy, .open {
-      padding:10px 14px; font-size:14px; border-radius:12px; border:none; cursor:pointer; font-weight:700;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .copy{ background:var(--accent); color:#fff; box-shadow: 0 8px 28px rgba(255,59,59,.18); }
-    .open{ background:#111; color:#fff; border:1px solid #222; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
-    .copy:hover{ transform:translateY(-3px) scale(1.03); }
-    .open:hover{ transform:translateY(-3px) scale(1.03); }
-
-    .toggle-btn { margin-left:12px; background: var(--card-strong); color: var(--text); border: 1px solid #333; padding: 10px 16px; border-radius: 14px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-weight:600; font-size:14px; transition: all .25s ease; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
-    .toggle-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 25px rgba(255,59,59,.25); }
-    .toggle-btn:active { transform: scale(.96); }
-    .toggle-icon { transition: transform .35s ease; }
-    .toggle-rotated .toggle-icon { transform: rotate(180deg); }
-
-    .social-panel{
-      overflow:hidden;
-      transition: max-height .55s cubic-bezier(.2,.9,.3,1), opacity .45s ease;
-      max-height:0;
-      opacity:0;
-    }
-    .social-panel.open{ opacity:1; max-height:2000px; }
-
-    .muted{ color:var(--muted); font-size:13px; }
-    .disclaimer{ font-size:13px; color:var(--muted); background:#222; border:1px solid #333; padding:16px; border-radius:14px; }
-
-    footer{ text-align:center; color:var(--muted); margin:22px 0 6px; font-size:12px }
-
-    @keyframes fadeInDown { from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
-    @keyframes fadeInUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    @keyframes pop { from{transform:scale(0);} to{transform:scale(1);} }
-
-body, * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+/* intro glitch — used only during intro typing */
+.big-name.glitch{animation:introGlitch .15s ease-in-out}
+@keyframes introGlitch{
+  0%  {text-shadow:3px 0 #ff003c,0 0 10px rgba(0,255,0,.8),-3px 0 #00f7ff}
+  25% {text-shadow:-3px 0 #ff003c,0 0 10px rgba(0,255,0,.8),3px 0 #00f7ff;transform:skewX(2deg)}
+  50% {text-shadow:3px 0 #ff003c,0 0 10px rgba(0,255,0,.8),-3px 0 #00f7ff;transform:skewX(-1deg)}
+  75% {text-shadow:-2px 0 #ff003c,0 0 10px rgba(0,255,0,.8),2px 0 #00f7ff;transform:skewX(0)}
+  100%{text-shadow:0 0 10px rgba(0,255,0,.8),0 0 40px rgba(0,255,0,.4)}
+}
+.intro-sub{
+  font-family:'Share Tech Mono',monospace;color:rgba(0,255,100,.6);
+  font-size:clamp(11px,1.5vw,15px);letter-spacing:5px;text-transform:uppercase;
+  margin-top:14px;opacity:0;transition:opacity .4s;
+}
+.intro-sub.show{opacity:1}
+.progress-wrap{
+  width:clamp(260px,40vw,440px);height:2px;background:rgba(0,255,0,.15);
+  margin:30px auto 0;border-radius:2px;overflow:hidden;opacity:0;transition:opacity .3s;
+}
+.progress-wrap.show{opacity:1}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#0f0,#00ff88);box-shadow:0 0 12px #0f0;transition:width .05s linear;}
+.skip-btn{
+  position:absolute;bottom:28px;right:28px;z-index:10;
+  font-family:'Share Tech Mono',monospace;color:rgba(0,255,0,.4);
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid rgba(0,255,0,.15);padding:8px 16px;border-radius:3px;
+  background:none;cursor:pointer;transition:all .2s;
+  opacity:0;animation:fadeIn .5s 1.5s forwards;
+}
+.skip-btn:hover{color:#0f0;border-color:#0f0;background:rgba(0,255,0,.05)}
+#intro.exit{animation:blastOut .55s cubic-bezier(.5,0,.8,1) forwards}
+@keyframes blastOut{
+  0%  {transform:scale(1);opacity:1;filter:brightness(1)}
+  40% {transform:scale(1.04);opacity:1;filter:brightness(3) saturate(0)}
+  100%{transform:scale(1.2);opacity:0;filter:brightness(5) saturate(0)}
 }
 
-img {
-  pointer-events: none;
-  -webkit-user-drag: none;
+/* ── MAIN PAGE ── */
+#main-page{
+  opacity:0;transform:scale(.97);
+  transition:opacity .6s .1s ease,transform .6s .1s ease;
+  background:#0a0a0a;min-height:100vh;color:#e8ddd0;
+}
+#main-page.revealed{opacity:1;transform:scale(1)}
+.cursor-dot{width:8px;height:8px;border-radius:50%;background:#0f0;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 8px #0f0;display:none;}
+.cursor-ring{width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,255,0,.5);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease;display:none;}
+
+:root{
+  --bg:#0a0a0a;--card:#111210;--border:#252220;
+  --text:#e8ddd0;--muted:#6b6560;--accent:#ff4500;--green:#00c853;--radius:8px;
+}
+.wrap{max-width:1100px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,3vw,36px)}
+
+/* ── HEADER ── */
+.header{
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+  padding:28px 32px;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--card);position:relative;overflow:hidden;margin-bottom:20px;
+}
+.header::before{content:'';position:absolute;top:0;left:0;width:120px;height:3px;background:linear-gradient(90deg,var(--accent),transparent);}
+.header::after{content:'';position:absolute;top:0;left:0;width:3px;height:60px;background:linear-gradient(180deg,var(--accent),transparent);}
+.avatar{
+  flex:0 0 80px;width:80px;height:80px;border-radius:50%;background:var(--accent);
+  display:grid;place-items:center;font-family:'Share Tech Mono',monospace;
+  font-size:18px;color:#fff;letter-spacing:-1px;position:relative;
+  box-shadow:0 0 0 1px rgba(255,69,0,.3),0 0 30px rgba(255,69,0,.2);
+}
+.avatar::after{
+  content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:1px dashed rgba(255,69,0,.3);animation:spin 10s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.header-text{flex:1 1 260px}
+.header-kicker{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--green);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:8px;}
+
+/* ── HEADER NAME — glitch lives only here ── */
+.header-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,5vw,52px);font-weight:800;line-height:1;letter-spacing:-2px;
+  animation:headerGlitch 7s ease-in-out infinite;
+}
+.header-name span{
+  color:var(--accent);display:inline-block;
+  animation:headerAccent 7s ease-in-out infinite;
+}
+@keyframes headerGlitch{
+  0%,13%,18%,28%,33%,63%,68%,100%{text-shadow:none;letter-spacing:-2px;transform:none;}
+  14%  {text-shadow:2px 0 #ff003c,-2px 0 #00f7ff;letter-spacing:-1px;}
+  15%  {text-shadow:-3px 0 #ff003c,3px 0 #00f7ff;letter-spacing:-3px;transform:skewX(-2deg);}
+  16%  {text-shadow:1px 0 #ff003c,-1px 0 #00f7ff;letter-spacing:-2px;transform:skewX(0);}
+  29%  {text-shadow:0 0 20px rgba(255,69,0,.7),0 0 40px rgba(255,69,0,.3);letter-spacing:-1px;}
+  31%  {text-shadow:none;letter-spacing:-2px;}
+  64%  {text-shadow:3px 0 rgba(0,200,83,.6),-3px 0 rgba(255,69,0,.6);letter-spacing:-2px;}
+  65%  {text-shadow:-2px 0 rgba(0,200,83,.6),2px 0 rgba(255,69,0,.6);letter-spacing:-2.5px;transform:skewX(1deg);}
+  66%  {text-shadow:1px 0 rgba(0,200,83,.3),-1px 0 rgba(255,69,0,.3);letter-spacing:-2px;transform:skewX(0);}
+}
+@keyframes headerAccent{
+  0%,13%,18%,28%,33%,63%,68%,100%{color:var(--accent);text-shadow:none;}
+  14%  {color:#ff6a30;text-shadow:2px 0 #ff003c,-2px 0 #00f7ff;}
+  15%  {color:#fff;text-shadow:-3px 0 #ff003c,3px 0 #00f7ff;}
+  16%  {color:var(--accent);text-shadow:none;}
+  29%  {color:#ff6a30;text-shadow:0 0 18px rgba(255,69,0,.7),0 0 40px rgba(255,69,0,.3);}
+  31%  {color:var(--accent);text-shadow:none;}
+  64%  {text-shadow:3px 0 rgba(0,200,83,.5),-3px 0 rgba(255,150,0,.5);}
+  65%  {color:#ff5520;text-shadow:-2px 0 rgba(0,200,83,.5),2px 0 rgba(255,150,0,.5);}
+  66%  {color:var(--accent);text-shadow:none;}
 }
 
-  </style>
+.header-tag{margin-top:8px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.cta-btn{
+  margin-left:auto;flex-shrink:0;background:var(--accent);color:#fff;
+  padding:12px 22px;border-radius:6px;font-family:'Syne',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 0 20px rgba(255,69,0,.25);transition:all .2s;border:1px solid transparent;
+}
+.cta-btn:hover{background:transparent;color:var(--accent);border-color:var(--accent)}
+
+/* ── BENTO GRID ── */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.cell{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden;}
+.cell::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media(max-width:820px){.c3,.c4,.c6,.c8{grid-column:span 12}}
+
+.clabel{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:8px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--border);}
+.clabel i{color:var(--accent)}
+.fields{display:flex;flex-direction:column;gap:0}
+.field{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;}
+.field:last-child{border-bottom:none}
+.flabel{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
+.fval{font-family:'Syne',sans-serif;font-weight:600;text-align:right}
+.about-txt{font-family:'Hind Siliguri',sans-serif;font-size:14px;line-height:1.9;color:var(--muted)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{padding:7px 13px;border-radius:4px;border:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.5px;color:var(--text);background:transparent;cursor:default;transition:all .18s;}
+.pill:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 10px rgba(255,69,0,.15)}
+.cell-acc{background:#110800;border-color:#2a1400}
+.cell-acc .pill:hover{border-color:var(--green);color:var(--green);box-shadow:0 0 10px rgba(0,200,83,.15)}
+.edu-list{display:flex;flex-direction:column;gap:0}
+.edu-item{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.edu-item:last-child{border-bottom:none}
+.edu-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px;box-shadow:0 0 8px rgba(255,69,0,.4)}
+.edu-lbl{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.edu-val{font-family:'Syne',sans-serif;font-size:14px;font-weight:600}
+
+/* ── CONTACTS & SOCIAL — same grid ── */
+.contact-grid,
+.social-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  width:100%;
+}
+@media(max-width:820px){
+  .contact-grid,.social-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .contact-grid,.social-grid{grid-template-columns:1fr}
+}
+/* social panel must not clip width */
+.social-panel{width:100%}
+.contact-card{
+  background:#0d0d0b;border:1px solid var(--border);border-radius:6px;padding:16px;
+  transition:border-color .2s,transform .2s;position:relative;overflow:hidden;
+}
+.contact-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,69,0,.03),transparent 60%);pointer-events:none}
+.contact-card:hover{border-color:rgba(255,69,0,.4);transform:translateY(-3px)}
+.cc-platform{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+.cc-val{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;margin-bottom:14px;word-break:break-all;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.copy,.open{
+  padding:7px 14px;font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:2px;border-radius:4px;cursor:pointer;transition:all .18s;
+  text-decoration:none;display:inline-flex;align-items:center;
+}
+.copy{background:var(--accent);color:#fff;border:1px solid var(--accent);box-shadow:0 0 12px rgba(255,69,0,.2)}
+.copy:hover{box-shadow:0 0 20px rgba(255,69,0,.4)}
+.open{background:transparent;color:var(--text);border:1px solid var(--border)}
+.open:hover{border-color:var(--text)}
+
+/* ── SOCIAL TOGGLE ── */
+.toggle-btn{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  padding:7px 14px;border-radius:4px;cursor:pointer;
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;
+  margin-left:12px;transition:all .2s;
+}
+.toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
+.toggle-icon{transition:transform .35s ease;display:inline-block}
+.toggle-rotated .toggle-icon{transform:rotate(180deg)}
+.social-panel{overflow:hidden;max-height:0;opacity:0;transition:max-height .6s cubic-bezier(.2,.9,.3,1),opacity .4s ease;width:100%;}
+.social-panel.open{max-height:2000px;opacity:1}
+.social-panel .social-grid{margin-top:18px}
+
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.sec-title i{color:var(--accent)}
+
+footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+body,*{-webkit-user-select:none;-moz-user-select:none;user-select:none}
+img{pointer-events:none;-webkit-user-drag:none}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="header">
-      <div class="avatar"><span>SSS</span></div>
-      <div class="title">
-        <h1 class="bio-heading">About <span>Shadman</span></h1>
-        <div class="subtitle">Student | Learner | Explorer</div>
-      </div>
-      <div class="cta">
-        <a class="btn" href="#contacts"><i class="fa fa-phone"></i> Contact</a>
-      </div>
-    </header>
 
-    <section class="grid" aria-live="polite">
-      <!-- Identity -->
-      <article class="card span-4">
-        <h2><i class="fa-solid fa-id-card"></i> Identity</h2>
-        <div class="fields">
-          <div class="field"><div class="label">Full Name</div><div class="value">Shadman Shakib <span class="muted">Sium</span></div></div>
-          <div class="field"><div class="label">Country / District</div><div class="value">Bangladesh • Panchagarh</div></div>
-          <div class="field"><div class="label">Religion</div><div class="value">Islam🇸🇦</div></div>
-          <div class="field"><div class="label">Born</div><div class="value">14th March 20**</div></div>
-        </div>
-      </article>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-      <!-- About Me -->
-      <article class="card span-4">
-        <h2><i class="fa-solid fa-user"></i> About Me</h2>
-        <p class="muted" style="margin:0">Passionate about personal and professional growth, creativity, and continuous learning. Strong computer skills combined with a love for exploring new technologies and digital tools. Traveling provides opportunities to experience diverse cultures and broaden perspectives. Honesty, teamwork, and perseverance are highly valued in every endeavor. Constantly seeking new challenges, improving skills, and contributing positively to any environment. Curiosity and adaptability make learning fast and collaboration effective, while embracing new experiences fuels both personal and professional development.</p>
-      </article>
-
-      <!-- Skills -->
-      <article class="card span-4">
-        <h2><i class="fa-solid fa-code"></i> Skills</h2>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <div class="pill">Racist</div>
-          <div class="pill">HTML</div>
-          <div class="pill">CSS</div>
-          <div class="pill">JavaScript</div>
-          <div class="pill">System Management💻</div>
-          <div class="pill">Microsoft Office</div>
-          <div class="pill">Microsoft Excel</div>
-        </div>
-      </article>
-
-      <!-- Education -->
-      <article class="card span-12">
-        <h2><i class="fa-solid fa-school"></i> Education</h2>
-        <div class="fields">
-          <div class="field">
-            <div class="label">Primary Schools</div>
-            <div class="value">
-              <span style="color:var(--accent)">●</span> Everest Pre-Cadet School And College, Panchagarh<br>
-              <span style="color:var(--accent)">●</span> Hannan Sheikh Public School and College, Panchagarh
-            </div>
-          </div>
-          <div class="field">
-            <div class="label">High School</div>
-            <div class="value">BP Government High School, Panchagarh</div>
-          </div>
-          <div class="field">
-            <div class="label">College</div>
-            <div class="value">Barrister Jamir Uddin Sircar Collegiate Institute, Panchagarh</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Interests -->
-      <article class="card span-12">
-        <h2><i class="fa-solid fa-heart"></i> Interests & Passions</h2>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <div class="pill">Computer Usage & Coding</div>
-          <div class="pill">Traveling & Exploring</div>
-          <div class="pill">Learning & Creativity</div>
-          <div class="pill">Teamwork & Honesty</div>
-        </div>
-      </article>
-
-      <!-- Language Skills -->
-      <article class="card span-12">
-        <h2><i class="fa-solid fa-language"></i> Language Skills</h2>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <div class="pill">বাংলা</div>
-          <div class="pill">English</div>
-          <div class="pill">日本語</div>
-          <div class="pill">हिन्दी</div>
-        </div>
-      </article>
-
-      <!-- Contacts -->
-      <article class="card span-12" id="contacts">
-        <h2><i class="fa-solid fa-address-book"></i> Contacts</h2>
-        <div class="links">
-          <!-- Email -->
-          <div class="link-item">
-            <div class="label"><i class="fas fa-envelope"></i> Email</div>
-            <div class="value">mdshadmanshakibsium@gmail.com</div>
-            <div class="btn-row">
-              <button class="copy" data-copy="mdshadmanshakibsium@gmail.com" aria-label="Copy email">Copy</button>
-              <a class="open" href="mailto:mdshadmanshakibsium@gmail.com" style="text-decoration:none; display:inline-block; padding:10px 14px; border-radius:12px;">Open</a>
-            </div>
-          </div>
-
-          <!-- Instagram -->
-          <div class="link-item">
-              <div class="label"><i class="fab fa-instagram"></i> Instagram</div>
-              <div class="value">@shadman_shakib_sium</div>
-              <div class="btn-row">
-                <button class="copy" data-copy="@shadman_shakib_sium" aria-label="Copy Instagram">Copy</button>
-                <button class="open" data-link="https://instagram.com/shadman_shakib_sium" aria-label="Open Instagram">Open</button>
-              </div>
-            </div>
-
-          <!-- Facebook -->
-          <div class="link-item">
-            <div class="label"><i class="fab fa-facebook-f"></i> Facebook</div>
-            <div class="value">সাদমান সাকিব</div>
-            <div class="btn-row">
-              <button class="copy" data-copy="https://facebook.com/MdShadmanShakibSium" aria-label="Copy Facebook link">Copy</button>
-              <button class="open" data-link="https://facebook.com/MdShadmanShakibSium" aria-label="Open Facebook">Open</button>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Social Media (toggle panel) -->
- <article class="card span-12" id="social-media">
-  <h2>
-    <i class="fa-solid fa-hashtag"></i> Social Media Links
-    <button id="toggle-social" class="toggle-btn" aria-expanded="false" aria-controls="social-panel">
-      <span class="toggle-text">Show</span>
-      <span class="toggle-icon" aria-hidden="true"><i class="fa fa-chevron-down"></i></span>
-    </button>
-  </h2>
-
-  <div class="social-panel" id="social-panel">
-    <!-- links wrapper -->
-    <div class="links">
-
-      <div class="link-item">
-        <div class="label"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
-        <div class="value">MD Shadman Shakib Sium</div>
-        <div class="btn-row">
-          <button class="copy" data-copy="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Copy</button>
-          <button class="open" data-link="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Open</button>
-        </div>
-      </div>
-
-      <div class="link-item">
-        <div class="label"><i class="fab fa-github"></i> GitHub</div>
-        <div class="value">Shadman Shakib Sium</div>
-        <div class="btn-row">
-          <button class="copy" data-copy="https://github.com/shadmanshakibsium">Copy</button>
-          <button class="open" data-link="https://github.com/shadmanshakibsium">Open</button>
-        </div>
-      </div>
-
-      <div class="link-item">
-        <div class="label"><i class="fab fa-x-twitter"></i> Twitter / X</div>
-        <div class="value">Shadman Shakib Sium</div>
-        <div class="btn-row">
-          <button class="copy" data-copy="@ShadmanShakibX">Copy</button>
-          <button class="open" data-link="https://x.com/ShadmanShakibX">Open</button>
-        </div>
-      </div>
-
-<div class="link-item">
-    <div class="label"><i class="fa-brands fa-discord"></i> Discord</div>
-    <div class="value">shadmanshakibsium</div>
-    <div class="btn-row">
-        <button class="copy" data-copy="https://discord.com/users/1267359105492844545">Copy</button>
-        <button class="open" data-link="https://discord.com/users/1267359105492844545">Open</button>
-    </div>
+<!-- INTRO -->
+<div id="intro">
+  <div class="bg-grid"></div>
+  <div class="intro-inner">
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="big-name" id="bigName"><span id="nameText"></span><span class="cursor" id="nameCursor"></span></div>
+    <div class="intro-sub" id="introSub">Student · Learner · Explorer</div>
+    <div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+  <button class="skip-btn" id="skipBtn">[ ESC ] Skip</button>
 </div>
 
+<!-- MAIN PAGE -->
+<div id="main-page">
+<div class="wrap">
 
-      <div class="link-item">
-        <div class="label"><i class="fab fa-telegram-plane"></i> Telegram</div>
-        <div class="value">Brother Beast</div>
-        <div class="btn-row">
-          <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
-          <button class="open" data-link="https://t.me/shadman_shakib_sium">Open</button>
+  <header class="header">
+    <div class="avatar">SSS</div>
+    <div class="header-text">
+      <span class="header-kicker">// bio.profile</span>
+      <h1 class="header-name">Shadman <span>Shakib</span></h1>
+      <p class="header-tag">Student · Learner · Explorer</p>
+    </div>
+    <a class="cta-btn" href="#contacts"><i class="fa fa-paper-plane"></i> Contact</a>
+  </header>
+
+  <div class="bento">
+
+    <div class="cell c4">
+      <div class="clabel"><i class="fa-solid fa-id-card"></i> Identity</div>
+      <div class="fields">
+        <div class="field"><span class="flabel">Name</span><span class="fval">Shadman Shakib <span style="color:var(--muted);font-weight:400">(Sium)</span></span></div>
+        <div class="field"><span class="flabel">Location</span><span class="fval">Bangladesh · Panchagarh</span></div>
+        <div class="field"><span class="flabel">Religion</span><span class="fval">Islam 🇸🇦</span></div>
+        <div class="field"><span class="flabel">Born</span><span class="fval">14 March 20**</span></div>
+      </div>
+    </div>
+
+    <div class="cell c8">
+      <div class="clabel"><i class="fa-solid fa-user"></i> About Me</div>
+      <p class="about-txt">Passionate about personal and professional growth, creativity, and continuous learning. Strong computer skills combined with a love for exploring new technologies and digital tools. Traveling provides opportunities to experience diverse cultures and broaden perspectives. Honesty, teamwork, and perseverance are highly valued in every endeavor. Constantly seeking new challenges, improving skills, and contributing positively to any environment. Curiosity and adaptability make learning fast and collaboration effective, while embracing new experiences fuels both personal and professional development.</p>
+    </div>
+
+    <div class="cell c6 cell-acc">
+      <div class="clabel"><i class="fa-solid fa-code"></i> Skills</div>
+      <div class="pills">
+        <span class="pill">HTML</span><span class="pill">CSS</span>
+        <span class="pill">JavaScript</span><span class="pill">System Mgmt 💻</span>
+        <span class="pill">MS Office</span><span class="pill">MS Excel</span>
+      </div>
+    </div>
+
+    <div class="cell c6">
+      <div class="clabel"><i class="fa-solid fa-language"></i> Languages</div>
+      <div class="pills">
+        <span class="pill">বাংলা</span><span class="pill">English</span>
+        <span class="pill">日本語</span><span class="pill">हिन्दी</span>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+        <div class="clabel" style="margin:0 0 12px;padding:0;border:none"><i class="fa-solid fa-heart"></i> Interests</div>
+        <div class="pills">
+          <span class="pill">Coding</span><span class="pill">Traveling</span>
+          <span class="pill">Learning</span><span class="pill">Teamwork</span>
         </div>
       </div>
+    </div>
 
-    </div> <!-- end links -->
-  </div> <!-- end social-panel -->
-</article>
+    <div class="cell c12">
+      <div class="clabel"><i class="fa-solid fa-school"></i> Education</div>
+      <div class="edu-list">
+        <div class="edu-item"><div class="edu-dot"></div><div><div class="edu-lbl">Primary School</div><div class="edu-val">Everest Pre-Cadet School And College, Panchagarh</div></div></div>
+        <div class="edu-item"><div class="edu-dot"></div><div><div class="edu-lbl">Primary School</div><div class="edu-val">Hannan Sheikh Public School and College, Panchagarh</div></div></div>
+        <div class="edu-item"><div class="edu-dot" style="background:var(--green);box-shadow:0 0 8px rgba(0,200,83,.4)"></div><div><div class="edu-lbl">High School</div><div class="edu-val">BP Government High School, Panchagarh</div></div></div>
+        <div class="edu-item"><div class="edu-dot" style="background:#e8ddd0;box-shadow:0 0 8px rgba(232,221,208,.3)"></div><div><div class="edu-lbl">College</div><div class="edu-val">Barrister Jamir Uddin Sircar Collegiate Institute, Panchagarh</div></div></div>
+      </div>
+    </div>
 
+    <div class="cell c12" id="contacts">
+      <div class="clabel"><i class="fa-solid fa-address-book"></i> Contacts</div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="cc-platform"><i class="fas fa-envelope"></i> Email</div>
+          <div class="cc-val">mdshadmanshakibsium@gmail.com</div>
+          <div class="btn-row">
+            <button class="copy" data-copy="mdshadmanshakibsium@gmail.com">Copy</button>
+            <a class="open" href="mailto:mdshadmanshakibsium@gmail.com">Open</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-platform"><i class="fab fa-instagram"></i> Instagram</div>
+          <div class="cc-val">@shadman_shakib_sium</div>
+          <div class="btn-row">
+            <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
+            <button class="open" data-link="https://instagram.com/shadman_shakib_sium">Open</button>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-platform"><i class="fab fa-facebook-f"></i> Facebook</div>
+          <div class="cc-val">সাদমান সাকিব</div>
+          <div class="btn-row">
+            <button class="copy" data-copy="https://facebook.com/MdShadmanShakibSium">Copy</button>
+            <button class="open" data-link="https://facebook.com/MdShadmanShakibSium">Open</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    </section>
+    <div class="cell c12">
+      <div class="sec-title">
+        <i class="fa-solid fa-hashtag"></i> Social Media Links
+        <button id="toggle-social" class="toggle-btn" aria-expanded="false">
+          <span class="toggle-text">Show</span>
+          <span class="toggle-icon"><i class="fa fa-chevron-down"></i></span>
+        </button>
+      </div>
+      <div class="social-panel" id="social-panel">
+        <div class="social-grid">
+          <div class="contact-card">
+            <div class="cc-platform"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
+            <div class="cc-val">MD Shadman Shakib Sium</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Copy</button>
+              <button class="open" data-link="https://www.linkedin.com/in/md-shadman-shakib-sium-629647340/">Open</button>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="cc-platform"><i class="fab fa-github"></i> GitHub</div>
+            <div class="cc-val">shadmanshakibsium</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="https://github.com/shadmanshakibsium">Copy</button>
+              <button class="open" data-link="https://github.com/shadmanshakibsium">Open</button>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="cc-platform"><i class="fab fa-x-twitter"></i> Twitter / X</div>
+            <div class="cc-val">@ShadmanShakibX</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="@ShadmanShakibX">Copy</button>
+              <button class="open" data-link="https://x.com/ShadmanShakibX">Open</button>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="cc-platform"><i class="fa-brands fa-discord"></i> Discord</div>
+            <div class="cc-val">shadmanshakibsium</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="https://discord.com/users/1267359105492844545">Copy</button>
+              <button class="open" data-link="https://discord.com/users/1267359105492844545">Open</button>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="cc-platform"><i class="fab fa-telegram-plane"></i> Telegram</div>
+            <div class="cc-val">Brother Beast</div>
+            <div class="btn-row">
+              <button class="copy" data-copy="@shadman_shakib_sium">Copy</button>
+              <button class="open" data-link="https://t.me/shadman_shakib_sium">Open</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <footer>
-      <small>© <span id="year"></span> Shadman • All rights reserved.</small>
-    </footer>
   </div>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <footer><span>© <span id="year"></span> SHADMAN · ALL RIGHTS RESERVED</span></footer>
+</div>
+</div>
 
-    // Copy and Open buttons
-    document.addEventListener('click', async function(e){
-      const t = e.target;
-      if (t.classList.contains('copy')) {
-        const text = t.dataset.copy || '';
-        try { await navigator.clipboard.writeText(text); const prev = t.innerHTML; t.innerHTML='Copied!'; t.disabled=true; setTimeout(()=>{t.innerHTML=prev; t.disabled=false;},1100); } 
-        catch(err){ t.innerHTML='Failed'; setTimeout(()=>{t.innerHTML='Copy';},1200); }
-      }
-      if (t.classList.contains('open')){
-        const link = t.dataset.link || t.getAttribute('href') || '';
-        if(!link) return;
-        if(link.startsWith('http') || link.startsWith('https')) window.open(link,'_blank','noopener');
-        else window.location.href=link;
-      }
-    });
+<script>
+/* CURSOR */
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  dot.style.left=mx+'px';dot.style.top=my+'px';
+  dot.style.display='block';ring.style.display='block';
+});
+(function ac(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ac);})();
 
-    // Toggle social panel
-    (function(){
-      const toggle = document.getElementById('toggle-social');
-      const panel = document.getElementById('social-panel');
-      function openPanel(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); toggle.setAttribute('aria-expanded','true'); toggle.classList.add('toggle-rotated'); toggle.querySelector('.toggle-text').textContent='Hide'; }
-      function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); toggle.setAttribute('aria-expanded','false'); toggle.classList.remove('toggle-rotated'); toggle.querySelector('.toggle-text').textContent='Show'; }
-      closePanel();
-      toggle.addEventListener('click',()=>{ panel.classList.contains('open')? closePanel():openPanel(); });
-      toggle.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle.click(); } });
-    })();
-
-      // DevTools detection and blur effect
-  let devtoolsOpen = false;
-  const threshold = 150;
-
-  function checkDevTools() {
-    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-
-    if (widthThreshold || heightThreshold) {
-      if (!devtoolsOpen) {
-        document.body.style.filter = 'blur(5px)';
-        document.body.style.pointerEvents = 'none';
-        devtoolsOpen = true;
-        console.log('DevTools detected!');
-      }
-    } else {
-      if (devtoolsOpen) {
-        document.body.style.filter = 'none';
-        document.body.style.pointerEvents = 'auto';
-        devtoolsOpen = false;
-      }
-    }
+/* INTRO */
+const boots=['> Initializing system...','> Loading profile data...','> Decrypting identity.json','> Rendering bio module...'];
+const NAME='SHADMAN';let done=false;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function runIntro(){
+  const bl=document.getElementById('bootLines');
+  for(let i=0;i<boots.length;i++){
+    const l=document.createElement('span');l.className='boot-line';l.textContent=boots[i];bl.appendChild(l);
+    await sleep(80);l.classList.add('show');await sleep(220);
   }
+  await sleep(200);
+  const nt=document.getElementById('nameText'),bn=document.getElementById('bigName');
+  for(let i=0;i<NAME.length;i++){
+    nt.textContent=NAME.slice(0,i+1);
+    if(Math.random()>.6){bn.classList.add('glitch');await sleep(80);bn.classList.remove('glitch');}
+    await sleep(100+Math.random()*80);
+  }
+  await sleep(200);
+  document.getElementById('nameCursor').style.display='none';
+  for(let g=0;g<3;g++){bn.classList.add('glitch');await sleep(60);bn.classList.remove('glitch');await sleep(40);}
+  document.getElementById('introSub').classList.add('show');
+  await sleep(300);
+  const pw=document.getElementById('progressWrap'),pb=document.getElementById('progressBar');
+  pw.classList.add('show');
+  let p=0;
+  await new Promise(r=>{const iv=setInterval(()=>{p=Math.min(100,p+(1+Math.random()*4));pb.style.width=p+'%';if(p>=100){clearInterval(iv);r();}},30);});
+  await sleep(300);exit();
+}
+function exit(){
+  if(done)return;done=true;
+  const i=document.getElementById('intro'),m=document.getElementById('main-page');
+  i.classList.add('exit');dot.style.display='none';ring.style.display='none';
+  setTimeout(()=>{i.style.display='none';m.classList.add('revealed');},520);
+}
+document.getElementById('skipBtn').addEventListener('click',exit);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')exit();});
+runIntro();
 
-  setInterval(checkDevTools, 500);
+/* YEAR */
+document.getElementById('year').textContent=new Date().getFullYear();
 
-  // Disable right click
-  document.addEventListener('contextmenu', function (e) {
-    e.preventDefault();
-  });
+/* COPY / OPEN */
+document.addEventListener('click',async function(e){
+  const t=e.target;
+  if(t.classList.contains('copy')){
+    try{
+      await navigator.clipboard.writeText(t.dataset.copy||'');
+      const p=t.innerHTML;t.innerHTML='Copied!';t.disabled=true;
+      setTimeout(()=>{t.innerHTML=p;t.disabled=false;},1100);
+    }catch{t.innerHTML='Failed';setTimeout(()=>{t.innerHTML='Copy';},1200);}
+  }
+  if(t.classList.contains('open')){
+    const l=t.dataset.link||t.getAttribute('href')||'';
+    if(!l)return;
+    if(l.startsWith('http'))window.open(l,'_blank','noopener');
+    else window.location.href=l;
+  }
+});
 
-  // Disable common keyboard shortcuts
-  document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey && ['u', 's', 'c', 'a'].includes(e.key.toLowerCase())) {
-      e.preventDefault();
-    }
-    if (e.key === 'F12') {
-      e.preventDefault();
-    }
-    if (e.key === 'PrintScreen') {
-      navigator.clipboard.writeText('');
-      alert('Screenshot blocked!');
-    }
-  });
-  </script>
+/* SOCIAL TOGGLE */
+(function(){
+  const btn=document.getElementById('toggle-social'),panel=document.getElementById('social-panel');
+  function o(){panel.classList.add('open');btn.setAttribute('aria-expanded','true');btn.classList.add('toggle-rotated');btn.querySelector('.toggle-text').textContent='Hide';}
+  function c(){panel.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.classList.remove('toggle-rotated');btn.querySelector('.toggle-text').textContent='Show';}
+  c();btn.addEventListener('click',()=>panel.classList.contains('open')?c():o());
+})();
+
+/* DEVTOOLS */
+let dv=false;
+setInterval(()=>{
+  const w=window.outerWidth-window.innerWidth>150,h=window.outerHeight-window.innerHeight>150;
+  if(w||h){if(!dv){document.body.style.filter='blur(5px)';document.body.style.pointerEvents='none';dv=true;}}
+  else{if(dv){document.body.style.filter='none';document.body.style.pointerEvents='auto';dv=false;}}
+},500);
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&['u','s','c','a'].includes(e.key.toLowerCase()))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+  if(e.key==='PrintScreen'){navigator.clipboard.writeText('');alert('Screenshot blocked!');}
+});
+</script>
 </body>
 </html>
