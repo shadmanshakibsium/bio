@@ -46,10 +46,10 @@ body::before{
 }
 
 /* ── CURSOR ── */
-.c-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 8px var(--accent);}
-.c-ring{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.25);position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:left .13s ease,top .13s ease,width .2s,height .2s,border-color .2s;}
+.c-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 8px var(--accent);opacity:0;transition:opacity .2s;}
+.c-ring{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.25);position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:left .13s ease,top .13s ease,width .2s,height .2s,border-color .2s,opacity .2s;opacity:0;}
 .c-ring.hover{width:50px;height:50px;border-color:var(--accent);}
-
+.c-dot.visible,.c-ring.visible{opacity:1;}
 /* ══════════════════════════════════════
    INTRO  —  Document 1-এর style হুবহু
 ══════════════════════════════════════ */
@@ -805,9 +805,16 @@ const dot=document.getElementById('cDot'),ring=document.getElementById('cRing');
 let mx=0,my=0,rx=0,ry=0;
 const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
 if(!isTouch){
+  document.addEventListener('mouseenter',()=>{
+    dot.classList.add('visible');ring.classList.add('visible');
+  });
+  document.addEventListener('mouseleave',()=>{
+    dot.classList.remove('visible');ring.classList.remove('visible');
+  });
   document.addEventListener('mousemove',e=>{
     mx=e.clientX;my=e.clientY;
     dot.style.left=mx+'px';dot.style.top=my+'px';
+    dot.classList.add('visible');ring.classList.add('visible');
   });
   (function tick(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
   document.querySelectorAll('a,button,.c-card,.skill-tag').forEach(el=>{
